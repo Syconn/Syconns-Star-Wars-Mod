@@ -1,29 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "swe",
+  "id": "swm",
   "version": "${version}",
-  "name": "Syconn's Star Wars Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Star Wars Mod",
+  "description": "A long time ago in a Galaxy Far Far Away",
   "authors": [
-    "Me!"
+    "Syconn"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": ""
   },
-  "license": "CC0-1.0",
-  "icon": "assets/swe/icon.png",
+  "license": "All-Rights-Reserved",
+  "icon": "assets/swm/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "mod.syconn.fabric.ExampleModFabric"
+      "mod.syconn.swm.fabric.StarWarsFabric"
     ],
     "client": [
-      "mod.syconn.fabric.client.ExampleModFabricClient"
+      "mod.syconn.swm.fabric.client.StarWarsFabricClient"
     ]
   },
   "mixins": [
-    "swe.mixins.json"
+    "swm.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.14",

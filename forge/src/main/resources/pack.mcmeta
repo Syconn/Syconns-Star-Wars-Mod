@@ -1,7 +1,6 @@
 {
   "pack": {
-    "description": "Syconn's Star Wars Mod",
-    "forge:server_data_pack_format": 15,
+    "description": "swm resources",
     "pack_format": 15
   }
 }

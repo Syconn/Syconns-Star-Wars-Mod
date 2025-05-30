@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/swe.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/swe.common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/swe.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/swe.common.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/swe.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/swe.common.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/swe.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/swe.fabric.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/swe.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/swe.fabric.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/swe.forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/swe.forge.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/swe.forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/swe.forge.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/StarWarsMod.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/StarWarsMod.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/StarWarsMod.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/StarWarsMod.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/StarWarsMod.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/StarWarsMod.common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/StarWarsMod.fabric.main.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/StarWarsMod.fabric.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fabric/StarWarsMod.fabric.test.iml" filepath="$PROJECT_DIR$/.idea/modules/fabric/StarWarsMod.fabric.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/StarWarsMod.forge.main.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/StarWarsMod.forge.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forge/StarWarsMod.forge.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forge/StarWarsMod.forge.test.iml" />
     </modules>
   </component>
 </project>
