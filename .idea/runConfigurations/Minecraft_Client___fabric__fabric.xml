@@ -1,16 +1,12 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" factoryName="Application" name="Minecraft Client (:fabric)" type="Application">
     <option name="MAIN_CLASS_NAME" value="dev.architectury.transformer.TransformerRuntime"/>
-    <module name="swe.fabric.main"/>
-    <option name="PROGRAM_PARAMETERS" value=""/>
+    <module name="StarWarsMod.forge.main"/>
+    <shortenClasspath name="ARGS_FILE"/>
     <option name="VM_PARAMETERS" value="-Dfabric.dli.config=C:\Users\Aidan\IdeaProjects\Syconn's@@0020Star@@0020Wars@@0020Mod\fabric\.gradle\loom-cache\launch.cfg -Dfabric.dli.env=client -Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotClient &quot;-Darchitectury.main.class=C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\fabric\.gradle\architectury\.main_class&quot; &quot;-Darchitectury.runtime.transformer=C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\fabric\.gradle\architectury\.transforms&quot; &quot;-Darchitectury.properties=C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\fabric\.gradle\architectury\.properties&quot; -Djdk.attach.allowAttachSelf=true &quot;-javaagent:C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\.gradle\architectury\architectury-transformer-agent.jar&quot;"/>
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/fabric/run/"/>
     <method v="2">
       <option enabled="true" name="Make"/>
     </method>
-    <envs>
-      
-    </envs>
-    <shortenClasspath name="ARGS_FILE"/>
   <classpathModifications/></configuration>
 </component>

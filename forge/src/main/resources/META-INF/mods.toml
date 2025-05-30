@@ -1,33 +1,33 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "All Rights Reserved"
 
 [[mods]]
-modId = "swe"
+modId = "swm"
 version = "${version}"
-displayName = "Syconn's Star Wars Mod"
-authors = "Me!"
+displayName = "Star Wars Mod"
+authors = "Syconn"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+A long time ago in a Galaxy Far Far Away
 '''
 #logoFile = ""
 
-[[dependencies.swe]]
+[[dependencies.swm]]
 modId = "forge"
 mandatory = true
 versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.swe]]
+[[dependencies.swm]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.swe]]
+[[dependencies.swm]]
 modId = "architectury"
 mandatory = true
 versionRange = "[9.2.14,)"

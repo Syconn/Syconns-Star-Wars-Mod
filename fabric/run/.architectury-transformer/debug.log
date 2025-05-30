@@ -113,36 +113,30 @@
 [Architectury Transformer DEBUG]  - C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_20_1_layered_hash_40359_v2\net\fabricmc\fabric-api\fabric-resource-loader-v0\0.11.12+fb82e9d777\fabric-resource-loader-v0-0.11.12+fb82e9d777.jar
 [Architectury Transformer DEBUG]  - C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_20_1_layered_hash_40359_v2\net\fabricmc\fabric-api\fabric-sound-api-v1\1.0.14+1802ada577\fabric-sound-api-v1-1.0.14+1802ada577.jar
 [Architectury Transformer DEBUG]  - C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\.gradle\loom-cache\remapped_mods\loom_mappings_1_20_1_layered_hash_40359_v2\net\fabricmc\fabric-api\fabric-transitive-access-wideners-v1\4.3.2+1802ada577\fabric-transitive-access-wideners-v1-4.3.2+1802ada577.jar
-[Architectury Transformer] Read classpath in 998.1 ms
+[Architectury Transformer] Read classpath in 939.0 ms
 [Architectury Transformer DEBUG] Closed File Systems for C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar
-[Architectury Transformer DEBUG] Transforming 5 transformer(s) from C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar to C:\Users\Aidan\AppData\Local\Temp\10818396910459934454.jar: 
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RuntimeMixinRefmapDetector@b59d31
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.GenerateFakeFabricMod@62fdb4a6
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformExpectPlatform@11e21d0e
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RemapInjectables@1dd02175
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformPlatformOnly@31206beb
-[Architectury Transformer DEBUG] Transforming from C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar to C:\Users\Aidan\AppData\Local\Temp\10818396910459934454.jar with 5 transformer(s) on dev.architectury.transformer.handler.SimpleTransformerHandler
+[Architectury Transformer DEBUG] Transforming 5 transformer(s) from C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar to C:\Users\Aidan\AppData\Local\Temp\9725083609970694285.jar: 
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RuntimeMixinRefmapDetector@1176dcec
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.GenerateFakeFabricMod@120d6fe6
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformExpectPlatform@4ba2ca36
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RemapInjectables@3444d69d
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformPlatformOnly@1372ed45
+[Architectury Transformer DEBUG] Transforming from C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar to C:\Users\Aidan\AppData\Local\Temp\9725083609970694285.jar with 5 transformer(s) on dev.architectury.transformer.handler.SimpleTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
-[Architectury Transformer DEBUG] Writing mod/syconn/ExampleMod with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing mod/syconn/mod/registry/ItemRegistrar with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing mod/syconn/mod/StarWars with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing mod/syconn/mod/util/Constants with maxs=true frames=true
 [Architectury Transformer DEBUG] Checking whether /swe.mixins.json is a mixin config.
-[Architectury Transformer DEBUG] Closed File Systems for C:\Users\Aidan\AppData\Local\Temp\10818396910459934454.jar
+[Architectury Transformer DEBUG] Closed File Systems for C:\Users\Aidan\AppData\Local\Temp\9725083609970694285.jar
 [Architectury Transformer] Listening at C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar
-[Architectury Transformer DEBUG] Temporary jar [C:\Users\Aidan\AppData\Local\Temp\10818396910459934454.jar] contains packages: mod.syconn
+[Architectury Transformer DEBUG] Temporary jar [C:\Users\Aidan\AppData\Local\Temp\9725083609970694285.jar] contains packages: mod.syconn.mod, mod.syconn.mod.util, mod.syconn.mod.registry
 [Architectury Transformer DEBUG] Closed File Systems for C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar
-[Architectury Transformer DEBUG] Classpath entry [C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\fabric\build\resources\main] contains packages[Arc[Architectury Transformer DEBUG] Transforming from mod/syconn/ExampleMod.class to mod/syconn/ExampleMod.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Classpath entry [C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\fabric\build\resources\main] contains packages: 
+[Architectury Transformer DEBUG] Transforming from mod/syconn/mod/StarWars.class to mod/syconn/mod/StarWars.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
-[Architectury Transformer DEBUG] Writing mod/syconn/ExampleMod with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed mod/syconn/ExampleMod in 819.3 μs
-2139479319244.jar: 
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RuntimeMixinRefmapDetector@b59d31
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.GenerateFakeFabricMod@62fdb4a6
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformExpectPlatform@11e21d0e
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RemapInjectables@1dd02175
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformPlatformOnly@31206beb
-[Architectury Transformer DEBUG] Transforming from C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar to C:\Users\Aidan\AppData\Local\Temp\1558872139479319244.jar with 5 transformer(s) on dev.architectury.transformer.handler.SimpleTransformerHandler
+[Architectury Transformer DEBUG] Writing mod/syconn/mod/StarWars with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed mod/syconn/mod/StarWars in 950.9 μs
+[Architectury Transformer DEBUG] Transforming from mod/syconn/mod/registry/ItemRegistrar.class to mod/syconn/mod/registry/ItemRegistrar.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
-[Architectury Transformer DEBUG] Writing architectury_inject_swe_fabric_21a7b1107ece4282bc95d8cd5151e721_32d392ccb9223e515e5eb303f7f423ed927445e46fdd7a00c857387c5220de80swecommon100devjar/PlatformMethods with maxs=true frames=true
-[Architectury Transformer DEBUG] Writing mod/syconn/ExampleMod with maxs=true frames=true
-[Architectury Transformer DEBUG] Checking whether /swe.mixins.json is a mixin config.
-[Architectury Transformer DEBUG] Checking whether /fabric.mod.json is a mixin config.
-[Architectury Transformer DEBUG] Closed File Systems for C:\Users\Aidan\IdeaProjects\Syconn's Star Wars Mod\common\build\devlibs\swe-common-1.0.0-dev.jar
+[Architectury Transformer DEBUG] Writing mod/syconn/mod/registry/ItemRegistrar with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed mod/syconn/mod/registry/ItemRegistrar in 1.024 ms
