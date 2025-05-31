@@ -15,6 +15,7 @@ public class DataGeneration {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
+        generator.addProvider(event.includeClient(), new LangProvider(generator.getPackOutput(), "en_us"));
         generator.addProvider(event.includeClient(), new ItemModels(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(generator.getPackOutput(), event.getLookupProvider(), DatapackProvider.BUILDER, Set.of(Constants.MOD)));
     }

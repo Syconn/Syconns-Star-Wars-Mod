@@ -23,12 +23,19 @@ subprojects {
     }
 
     repositories {
-        // Add repositories to retrieve artifacts from in here.
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
     }
 
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
-        mappings loom.officialMojangMappings()
+
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-$rootProject.minecraft_version:$rootProject.parchment_version@zip")
+        }
     }
 
     java {

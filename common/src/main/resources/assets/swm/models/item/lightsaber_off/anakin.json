@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"silver": "stf:item/silver",
-		"gold": "stf:item/gold",
-		"black": "stf:item/black",
-		"metal": "stf:item/metal"
+		"silver": "swm:item/silver",
+		"gold": "swm:item/gold",
+		"black": "swm:item/black",
+		"metal": "swm:item/metal"
 	},
 	"elements": [
 		{

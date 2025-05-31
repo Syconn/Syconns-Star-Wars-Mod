@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "stf:item/padawan_kenobi",
-		"3": "stf:item/blades/white",
-		"particle": "stf:item/padawan_kenobi"
+		"0": "swm:item/padawan_kenobi",
+		"3": "swm:item/blades/white",
+		"particle": "swm:item/padawan_kenobi"
 	},
 	"elements": [
 		{

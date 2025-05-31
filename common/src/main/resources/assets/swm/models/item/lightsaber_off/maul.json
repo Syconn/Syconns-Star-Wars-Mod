@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"maul_lightsaber_texture": "stf:item/maul_lightsaber_texture"
+		"maul_lightsaber_texture": "swm:item/maul_lightsaber_texture"
 	},
 	"elements": [
 		{
