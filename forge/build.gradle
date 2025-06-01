@@ -9,6 +9,8 @@ sourceSets {
 }
 
 loom {
+    accessWidenerPath = project(':common').file("src/main/resources/swm.accessWidener")
+
     forge {
         mixinConfig "swm.mixins.json"
     }
