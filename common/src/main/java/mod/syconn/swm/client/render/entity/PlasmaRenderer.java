@@ -25,11 +25,11 @@ public class PlasmaRenderer {
             RenderType.CompositeState.builder().setLayeringState(RenderStateShard.LayeringStateShard.VIEW_OFFSET_Z_LAYERING).setTransparencyState(RenderStateShard.LIGHTNING_TRANSPARENCY)
             .setShaderState(RenderStateShard.RENDERTYPE_LIGHTNING_SHADER).createCompositeState(true));
 
-    public static void renderPlasma(ItemDisplayContext renderMode, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay, boolean unstable, float baseLength, float lengthCoefficient, float radiusCoefficient, boolean cap, int glowHsv) {
+    public static void renderPlasma(PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay, boolean unstable, float length, float lengthScalar, float radius, boolean cap, int glowHsv) {
         final VertexConsumer vc = bufferSource.getBuffer(PLASMA);
 
-        var totalLength = baseLength * lengthCoefficient;
-        var shake = (1.1f - lengthCoefficient) * 0.004f;
+        var totalLength = length * lengthScalar;
+        var shake = (1.1f - lengthScalar) * 0.004f;
 
         if (unstable) shake *= 2;
 
@@ -38,15 +38,15 @@ public class PlasmaRenderer {
         poseStack.translate(dX, 0, dY);
 
         PlasmaBuffer.RENDER.init(vc, poseStack.last(), 1, 1, 1, 1, overlay, light);
-        renderGlow(totalLength, radiusCoefficient, ColorUtil.hsvGetH(glowHsv), ColorUtil.hsvGetS(glowHsv), ColorUtil.hsvGetV(glowHsv), unstable, cap);
+        renderGlow(totalLength, radius, ColorUtil.hsvGetH(glowHsv), ColorUtil.hsvGetS(glowHsv), ColorUtil.hsvGetV(glowHsv), unstable, cap);
     }
 
 
-    public static void renderBrick(ItemDisplayContext renderMode, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay, float baseLength, float lengthCoefficient, int glowHsv) {
+    public static void renderBrick(PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay, float length, float lengthScalar, int glowHsv) {
         final VertexConsumer vc = bufferSource.getBuffer(PLASMA);
 
-        var totalLength = baseLength * lengthCoefficient;
-        var shake = (1.1f - lengthCoefficient) * 0.004f;
+        var totalLength = length * lengthScalar;
+        var shake = (1.1f - lengthScalar) * 0.004f;
 
         double dX = (float) Constants.RANDOM.nextGaussian() * shake;
         double dY = (float) Constants.RANDOM.nextGaussian() * shake;
@@ -136,16 +136,16 @@ public class PlasmaRenderer {
         PlasmaBuffer.RENDER.vertex(-size, -size, 0, nx, ny, nz, 0, 0);
     }
 
-    public static void renderGlow(float bladeLength, float radiusCoefficient, float glowHue, float glowSat, float glowVal, boolean unstable, boolean cap) {
-        if (bladeLength == 0) return;
+    public static void renderGlow(float length, float radius, float glowHue, float glowSat, float glowVal, boolean unstable, boolean cap) {
+        if (length == 0) return;
 
-        var thicknessBottom = radiusCoefficient * 0.018f;
-        var thicknessTop = radiusCoefficient * (cap ? 0.012f : thicknessBottom);
+        var thicknessBottom = radius * 0.018f;
+        var thicknessTop = radius * (cap ? 0.012f : thicknessBottom);
 
         var mL = 0;
         var xL = 14;
 
-        var deltaThickness = radiusCoefficient * 0.0028f;
+        var deltaThickness = radius * 0.0028f;
         var minOutputLayer = mL * thicknessBottom / deltaThickness;
         var globalTime = ((System.currentTimeMillis()) % Integer.MAX_VALUE) / 4f;
 
@@ -165,12 +165,12 @@ public class PlasmaRenderer {
 
             if (layer > 0) {
                 PlasmaBuffer.RENDER.invertCull(true);
-                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thicknessTop + layerThickness, thicknessBottom + layerThickness, 0, bladeLength + layerThickness, 0, 0, -layerThickness, 0);
+                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thicknessTop + layerThickness, thicknessBottom + layerThickness, 0, length + layerThickness, 0, 0, -layerThickness, 0);
                 PlasmaBuffer.RENDER.invertCull(false);
             } else {
                 final var segments = unstable ? 35 : 1;
                 final var dSegments = 1f / segments;
-                final var dLength = bladeLength / segments;
+                final var dLength = length / segments;
 
                 final var dLengthTime = 5;
 

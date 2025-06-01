@@ -19,24 +19,24 @@ public class LightsaberItemRender implements IItemRenderer {
         poseStack.pushPose();
 
         model.getTransforms().getTransform(renderMode).apply(leftHanded, poseStack);
-        renderDirect(stack, renderMode, poseStack, bufferSource, light, overlay, true);
+        renderDirect(stack, renderMode, poseStack, bufferSource, light, overlay);
 
         poseStack.popPose();
     }
 
-    public void renderDirect(ItemStack stack, ItemDisplayContext renderMode, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay, boolean useHandPos) {
+    public void renderDirect(ItemStack stack, ItemDisplayContext renderMode, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         if (!(stack.getItem() instanceof LightsaberItem li)) return;
 
         var unstable = false;
-        var baseLength = 1.6f;
-        var lengthCoefficient = 1;
+        var length = 1.6f;
+        var lengthScalar = 1;
 
         if (renderMode != ItemDisplayContext.GUI) {
             var handPos = new Vec3(0f, 4, 0f);
             poseStack.scale(0.2f, 0.2f, 0.2f);
             poseStack.translate(-handPos.x, -handPos.y, -handPos.z);
             poseStack.scale(5, 5, 5);
-            PlasmaRenderer.renderPlasma(renderMode, poseStack, bufferSource, light, overlay, unstable, baseLength, lengthCoefficient, 0.80f, true, ColorUtil.packHsv(0.6f, 0.85f, 0.5f));
+            PlasmaRenderer.renderPlasma(poseStack, bufferSource, light, overlay, unstable, length, lengthScalar, 0.80f, true, ColorUtil.packHsv(0.6f, 0.85f, 0.5f));
         }
     }
 }
