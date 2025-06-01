@@ -1,9 +1,52 @@
 package mod.syconn.swm.util.math;
 
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import org.joml.Vector3f;
 
 public class ColorUtil {
+
+    public static int tint(int src, int tint, TintMode tintMode) {
+        var srcA = FastColor.ABGR32.alpha(src);
+        var srcR = FastColor.ABGR32.red(src);
+        var srcG = FastColor.ABGR32.green(src);
+        var srcB = FastColor.ABGR32.blue(src);
+
+        var tintA = FastColor.ABGR32.alpha(tint);
+        if (tintA == 0) tintA = 255;
+        var tintR = FastColor.ABGR32.red(tint);
+        var tintG = FastColor.ABGR32.green(tint);
+        var tintB = FastColor.ABGR32.blue(tint);
+
+        switch (tintMode) {
+            case Multiply -> {
+                srcA = (srcA * tintA) / 255;
+                srcR = (srcR * tintR) / 255;
+                srcG = (srcG * tintG) / 255;
+                srcB = (srcB * tintB) / 255;
+            }
+            case Add -> {
+                srcR = Mth.clamp(srcR + tintR, 0, 255);
+                srcG = Mth.clamp(srcG + tintG, 0, 255);
+                srcB = Mth.clamp(srcB + tintB, 0, 255);
+            }
+            case Overlay -> {
+                var srcRf = srcR / 255f;
+                var srcGf = srcG / 255f;
+                var srcBf = srcB / 255f;
+
+                var tintRf = tintR / 255f;
+                var tintGf = tintG / 255f;
+                var tintBf = tintB / 255f;
+
+                srcR = (int)(255 * Mth.clamp(srcRf < 0.5 ? 2 * srcRf * tintRf : (1 - 2 * (1 - srcRf) * (1 - tintRf)), 0, 1));
+                srcG = (int)(255 * Mth.clamp(srcGf < 0.5 ? 2 * srcGf * tintGf : (1 - 2 * (1 - srcGf) * (1 - tintGf)), 0, 1));
+                srcB = (int)(255 * Mth.clamp(srcBf < 0.5 ? 2 * srcBf * tintBf : (1 - 2 * (1 - srcBf) * (1 - tintBf)), 0, 1));
+            }
+        }
+
+        return FastColor.ABGR32.color(srcA, srcB, srcG, srcR);
+    }
 
     public static int packRgb(int r, int g, int b) {
         var rgb = (r & 0xFF);
@@ -109,5 +152,11 @@ public class ColorUtil {
 
     public static float getHue(double h, double x) {
         return (float) Mth.clamp(-0.06 * Math.exp(-0.011 * Math.pow(x - 6, 2)) + h, 0, 1);
+    }
+    
+    public enum TintMode {
+        Add,
+        Multiply,
+        Overlay
     }
 }
