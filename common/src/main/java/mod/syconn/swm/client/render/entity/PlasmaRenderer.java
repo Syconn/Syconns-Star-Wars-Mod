@@ -59,23 +59,12 @@ public class PlasmaRenderer {
         var color = ColorUtil.hsvToRgbInt(ColorUtil.hsvGetH(glowHsv), ColorUtil.hsvGetS(glowHsv), ColorUtil.hsvGetV(glowHsv));
         PlasmaBuffer.RENDER.setColor(color, 128);
 
-        // glow layers
         PlasmaBuffer.RENDER.invertCull(true);
-        PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(
-                thickness,
-                thickness,
-                0, totalLength, 0,
-                0, 0, 0
-        );
+        PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thickness, thickness, 0, totalLength, 0, 0, 0, 0);
         PlasmaBuffer.RENDER.invertCull(false);
 
         PlasmaBuffer.RENDER.invertCull(true);
-        PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(
-                thickness * 0.6f,
-                thickness * 0.6f,
-                0, 0.3f * totalLength, 0,
-                0, 0.35f * totalLength, 0
-        );
+        PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thickness * 0.6f, thickness * 0.6f, 0, 0.3f * totalLength, 0, 0, 0.35f * totalLength, 0);
         PlasmaBuffer.RENDER.invertCull(false);
     }
 
@@ -170,27 +159,15 @@ public class PlasmaRenderer {
             var alpha = getAlpha(x);
             if (alpha < 16 / 255f) continue;
 
-            var color = ColorUtil.hsvToRgbInt(
-                    getHue(glowHue + hueOffset, x),
-//                    glowHue,
-                    getSaturation(x, glowSat),
-//                    glowSat,
-                    getValue(x, glowVal)
-//                    glowVal
-            );
+            var color = ColorUtil.hsvToRgbInt(getHue(glowHue + hueOffset, x), getSaturation(x, glowSat), getValue(x, glowVal));
             PlasmaBuffer.RENDER.setColor(color, (int)(255 * alpha));
             var layerThickness = deltaThickness * layer;
 
-            if (layer > 0) { // Outer layers
+            if (layer > 0) {
                 PlasmaBuffer.RENDER.invertCull(true);
-                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(
-                        thicknessTop + layerThickness,
-                        thicknessBottom + layerThickness,
-                        0, bladeLength + layerThickness, 0,
-                        0, -layerThickness, 0
-                );
+                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thicknessTop + layerThickness, thicknessBottom + layerThickness, 0, bladeLength + layerThickness, 0, 0, -layerThickness, 0);
                 PlasmaBuffer.RENDER.invertCull(false);
-            } else { // core layer
+            } else {
                 final var segments = unstable ? 35 : 1;
                 final var dSegments = 1f / segments;
                 final var dLength = bladeLength / segments;
@@ -205,14 +182,7 @@ public class PlasmaRenderer {
                     var dTBottom = unstable ? (float)Constants.SIMPLEX.getValue(globalTime, dLengthTime * dLength * i) * 0.0075f : 0;
 
                     noise = (float) Constants.SIMPLEX.getValue(globalTime, 3 * dLength * i);
-                    color = ColorUtil.hsvToRgbInt(
-                            0,
-//                            glowHue,
-                            (unstable ? (0.07f - noise * 0.07f) : 0) * glowSat,
-//                            glowSat,
-                            getValue(x, glowVal)
-//                            glowSat
-                    );
+                    color = ColorUtil.hsvToRgbInt(0, (unstable ? (0.07f - noise * 0.07f) : 0) * glowSat, getValue(x, glowVal) - 0.12f);
                     PlasmaBuffer.RENDER.setColor(color, (int)(255 * getAlpha(x)));
                     PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(topThicknessLerp + dTTop, bottomThicknessLerp + dTBottom, 0, dLength * (i + 1), 0, 0, dLength * i, 0);
                 }
@@ -243,39 +213,17 @@ public class PlasmaRenderer {
                 var color = ColorUtil.hsvToRgbInt(getHue(glowHue, x), getSaturation(x, glowSat), getValue(x, glowVal));
                 PlasmaBuffer.RENDER.setColor(color, (int)(255 * alpha));
 
-                // glow layers
                 PlasmaBuffer.RENDER.invertCull(true);
                 PlasmaBuffer.RENDER.skipFace(1);
-                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(
-                        thicknessTop + layerThickness,
-                        thicknessBottom + layerThickness,
-                        0, bladeLength * 0.6f + layerThickness, 0,
-                        0, -layerThickness, 0
-                );
+                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thicknessTop + layerThickness, thicknessBottom + layerThickness, 0, bladeLength * 0.6f + layerThickness, 0, 0, -layerThickness, 0);
                 PlasmaBuffer.RENDER.skipFace(3);
-                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(
-                        thicknessTop / 4f + layerThickness,
-                        thicknessTop + layerThickness,
-                        0, bladeLength + layerThickness, thicknessTop * 0.75f,
-                        0, bladeLength * 0.6f + layerThickness, 0
-                );
+                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thicknessTop / 4f + layerThickness, thicknessTop + layerThickness, 0, bladeLength + layerThickness, thicknessTop * 0.75f, 0, bladeLength * 0.6f + layerThickness, 0);
                 PlasmaBuffer.RENDER.skipFace(-1);
                 PlasmaBuffer.RENDER.invertCull(false);
-            }
-            else {
+            } else {
                 PlasmaBuffer.RENDER.setColor(0x101010, (int)(255 * getAlpha(x)));
-                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(
-                        thicknessTop,
-                        thicknessBottom,
-                        0, bladeLength * 0.6f, 0,
-                        0, 0, 0
-                );
-                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(
-                        thicknessTop / 4f,
-                        thicknessTop,
-                        0, bladeLength, thicknessTop * 0.75f,
-                        0, bladeLength * 0.6f, 0
-                );
+                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thicknessTop, thicknessBottom, 0, bladeLength * 0.6f, 0, 0, 0, 0);
+                PlasmaBuffer.RENDER.drawSolidBoxSkewTaper(thicknessTop / 4f, thicknessTop, 0, bladeLength, thicknessTop * 0.75f, 0, bladeLength * 0.6f, 0);
             }
         }
 
@@ -283,6 +231,6 @@ public class PlasmaRenderer {
     }
 
     public static void renderLayer(RenderBuffers buffers) {
-        buffers.outlineBufferSource().getBuffer(PLASMA).endVertex(); // TODO MAY NOT WORK
+        buffers.outlineBufferSource().getBuffer(PLASMA).endVertex();
     }
 }
