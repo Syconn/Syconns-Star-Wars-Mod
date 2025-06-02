@@ -2,14 +2,17 @@ package mod.syconn.swm.features.lightsaber.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.syconn.swm.client.render.entity.PlasmaRenderer;
+import mod.syconn.swm.features.lightsaber.data.LightsaberDefaults;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import mod.syconn.swm.util.client.render.IItemRenderer;
+import mod.syconn.swm.util.math.ColorUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 
 public class LightsaberItemRender implements IItemRenderer {
 
@@ -29,11 +32,9 @@ public class LightsaberItemRender implements IItemRenderer {
         var lT = LightsaberTag.get(stack);
 
         if (renderMode != ItemDisplayContext.GUI) {
-            var handPos = lT.getEmitterPos();
-            poseStack.scale(0.2f, 0.2f, 0.2f);
+            var handPos = !lT.emitterPositions.isEmpty() ? lT.emitterPositions.get(0) : new Vec3(0, 0, 0);
             poseStack.translate(-handPos.x, -handPos.y, -handPos.z);
-            poseStack.scale(5, 5, 5);
-            PlasmaRenderer.renderPlasma(poseStack, bufferSource, light, overlay, !lT.isStable(), lT.getLength(), lT.getLengthScalar(), lT.getRadius(), true, lT.getColor());
+            PlasmaRenderer.renderPlasma(poseStack, bufferSource, light, overlay, !lT.stable, lT.length, lT.lengthScalar, lT.radius, true, lT.color);
         }
     }
 }

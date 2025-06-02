@@ -1,9 +1,11 @@
 package mod.syconn.swm.forge.client.datagen;
 
-import mod.syconn.swm.registry.ItemRegistrar;
+import mod.syconn.swm.registry.ModItems;
 import mod.syconn.swm.util.Constants;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
+
+import static mod.syconn.swm.util.Constants.MOD;
 
 public class LangProvider extends LanguageProvider {
 
@@ -12,6 +14,8 @@ public class LangProvider extends LanguageProvider {
     }
 
     protected void addTranslations() {
-        addItem(ItemRegistrar.LIGHTSABER, "Lightsaber");
+        add("itemGroup." + MOD + ".star_wars", "Star Wars");
+
+        addItem(ModItems.LIGHTSABER, "Lightsaber");
     }
 }

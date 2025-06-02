@@ -1,10 +1,10 @@
 package mod.syconn.swm;
 
-import mod.syconn.swm.registry.ItemRegistrar;
+import mod.syconn.swm.registry.ModItems;
 
 public final class StarWars {
     public static void init() {
-        ItemRegistrar.ITEMS.register();
-        ItemRegistrar.TABS.register();
+        ModItems.ITEMS.register();
+        ModItems.TABS.register();
     }
 }

@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 import static mod.syconn.swm.util.Constants.MOD;
 
-public class ItemRegistrar {
+public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MOD, Registries.ITEM);
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(MOD, Registries.CREATIVE_MODE_TAB);
@@ -24,7 +24,7 @@ public class ItemRegistrar {
     public static final RegistrySupplier<Item> LIGHTSABER = registerItem("lightsaber", LightsaberItem::new);
 
     public static final RegistrySupplier<CreativeModeTab> TAB = TABS.register("star_wars", () -> CreativeTabRegistry.create(
-            Component.translatable("itemGroup." + MOD + ".star_wars"), () -> new ItemStack(Items.ACACIA_LEAVES)));
+            Component.translatable("itemGroup." + MOD + ".star_wars"), () -> new ItemStack(LIGHTSABER.get())));
 
     @SuppressWarnings("unchecked")
     private static <T extends Item> RegistrySupplier<T> registerItem(String id, Item.Properties properties) {

@@ -1,11 +1,11 @@
 package mod.syconn.swm.features.lightsaber.data;
 
-import mod.syconn.swm.util.math.ColorUtil;
 import mod.syconn.swm.util.nbt.NbtTools;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class LightsaberTag {
@@ -17,14 +17,14 @@ public class LightsaberTag {
     private final String LENGTH_SCALAR = "length_scalar";
     private final String RADIUS = "radius";
     private final String COLOR = "color";
-    private final String EMITTER_POS = "emitter_pos";
+    private final String EMITTER_POSITIONS = "emitter_pos";
 
-    private boolean stable;
-    private float length;
-    private float lengthScalar;
-    private float radius;
-    private int color;
-    private Vec3 emitterPos;
+    public boolean stable;
+    public float length;
+    public float lengthScalar;
+    public float radius;
+    public int color;
+    public List<Vec3> emitterPositions;
 
     private LightsaberTag(CompoundTag tag) {
         this.stable = tag.getBoolean(STABLE);
@@ -32,16 +32,16 @@ public class LightsaberTag {
         this.lengthScalar = tag.getFloat(LENGTH_SCALAR);
         this.radius = tag.getFloat(RADIUS);
         this.color = tag.getInt(COLOR);
-        this.emitterPos = NbtTools.readVec3(tag.getCompound(EMITTER_POS));
+        this.emitterPositions = NbtTools.getArray(tag.getCompound(EMITTER_POSITIONS), NbtTools::getVec3);
     }
 
-    public LightsaberTag(boolean stable, float length, float lengthScalar, float radius, int color, Vec3 emitterPos) {
+    public LightsaberTag(boolean stable, float length, float lengthScalar, float radius, int color, List<Vec3> emitterPositions) {
         this.stable = stable;
         this.length = length;
         this.lengthScalar = lengthScalar;
         this.radius = radius;
         this.color = color;
-        this.emitterPos = emitterPos;
+        this.emitterPositions = emitterPositions;
     }
 
     public static LightsaberTag get(ItemStack stack) {
@@ -56,7 +56,7 @@ public class LightsaberTag {
     }
 
     private static LightsaberTag create(ItemStack stack) {
-        var lT = new LightsaberTag(true, 1.6f, 1, 0.80f, ColorUtil.packHsv(0.6f, 0.85f, 0.5f), new Vec3(0f, 4, 0f));
+        var lT = LightsaberDefaults.LightsaberTypes.YODA.getData().getTag();
         lT.change(stack);
         return lT;
     }
@@ -68,31 +68,7 @@ public class LightsaberTag {
         tag.putFloat(LENGTH_SCALAR, lengthScalar);
         tag.putFloat(RADIUS, radius);
         tag.putInt(COLOR, color);
-        tag.put(EMITTER_POS, NbtTools.writeVec3(emitterPos));
+        tag.put(EMITTER_POSITIONS, NbtTools.putArray(emitterPositions, NbtTools::putVec3));
         stack.getOrCreateTag().put(ID, tag);
-    }
-
-    public boolean isStable() {
-        return stable;
-    }
-
-    public float getLength() {
-        return length;
-    }
-
-    public float getLengthScalar() {
-        return lengthScalar;
-    }
-
-    public float getRadius() {
-        return radius;
-    }
-
-    public int getColor() {
-        return color;
-    }
-
-    public Vec3 getEmitterPos() {
-        return emitterPos;
     }
 }
