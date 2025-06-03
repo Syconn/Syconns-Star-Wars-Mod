@@ -45,7 +45,7 @@ public class LightsaberTag {
     }
 
     public static LightsaberTag get(ItemStack stack) {
-        if (!stack.getOrCreateTag().contains(ID)) return create(stack);
+//        if (!stack.getOrCreateTag().contains(ID)) return create(stack);
         return new LightsaberTag(stack.getOrCreateTag().getCompound(ID));
     }
 
@@ -55,11 +55,11 @@ public class LightsaberTag {
         lT.change(stack);
     }
 
-    private static LightsaberTag create(ItemStack stack) {
-        var lT = LightsaberDefaults.LightsaberTypes.YODA.getData().getTag();
-        lT.change(stack);
-        return lT;
-    }
+//    private static LightsaberTag create(ItemStack stack) {
+//        var lT = LightsaberDefaults.LightsaberTypes.YODA.getData().getTag();
+//        lT.change(stack);
+//        return lT;
+//    }
 
     private void change(ItemStack stack) {
         var tag = new CompoundTag();
