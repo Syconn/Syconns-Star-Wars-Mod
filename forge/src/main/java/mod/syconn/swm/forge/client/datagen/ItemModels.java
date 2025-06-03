@@ -1,5 +1,6 @@
 package mod.syconn.swm.forge.client.datagen;
 
+import mod.syconn.swm.forge.client.data.LightsaberDefaults;
 import mod.syconn.swm.registry.ModItems;
 import mod.syconn.swm.util.Constants;
 import net.minecraft.data.PackOutput;
@@ -19,12 +20,10 @@ public class ItemModels extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ItemModelBuilder builder = getBuilder(getItemId(ModItems.LIGHTSABER.get()).toString()).parent(generated("lightsaber_off/yoda"));
+        ItemModelBuilder builder = getBuilder(getItemId(ModItems.LIGHTSABER.get()).toString()).parent(generated("lightsaber/yoda"));
 
-//        for (LightsaberData.HandleType type : LightsaberData.HandleType.values()){
-//            builder.override().predicate(new ResourceLocation("model"), type.getId()).predicate(new ResourceLocation("active"), 0.0f).model(generated("item/lightsaber_off/" + type.getType())).end();
-//            builder.override().predicate(new ResourceLocation("model"), type.getId()).predicate(new ResourceLocation("active"), 1.0f).model(generated("item/lightsaber_on/" + type.getType())).end();
-//        }
+        for (var lightsaber : LightsaberDefaults.LightsaberTypes.values())
+            builder.override().predicate(Constants.withId("model"), lightsaber.getData().model() * 0.1f).model(generated("lightsaber/" + lightsaber.getId())).end();
     }
 
     private ModelFile generated(String loc) {

@@ -1,11 +1,9 @@
 package mod.syconn.swm.features.lightsaber.data;
 
 import mod.syconn.swm.addons.LightsaberContent;
-import mod.syconn.swm.addons.TempDefaults;
 import mod.syconn.swm.util.Constants;
 import mod.syconn.swm.util.nbt.NbtTools;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -16,6 +14,7 @@ public class LightsaberTag {
 
     private static final String ID = "lightsaberData";
 
+    private final String MODEL = "model";
     private final String STABLE = "stable";
     private final String LENGTH = "length";
     private final String LENGTH_SCALAR = "length_scalar";
@@ -23,6 +22,7 @@ public class LightsaberTag {
     private final String COLOR = "color";
     private final String EMITTER_POSITIONS = "emitter_pos";
 
+    public int model;
     public boolean stable;
     public double length;
     public double lengthScalar;
@@ -31,6 +31,7 @@ public class LightsaberTag {
     public List<Vec3> emitterPositions;
 
     private LightsaberTag(CompoundTag tag) {
+        this.model = tag.getInt(MODEL);
         this.stable = tag.getBoolean(STABLE);
         this.length = tag.getDouble(LENGTH);
         this.lengthScalar = tag.getDouble(LENGTH_SCALAR);
@@ -39,7 +40,8 @@ public class LightsaberTag {
         this.emitterPositions = NbtTools.getArray(tag.getCompound(EMITTER_POSITIONS), NbtTools::getVec3);
     }
 
-    public LightsaberTag(boolean stable, double length, double lengthScalar, double radius, int color, List<Vec3> emitterPositions) {
+    public LightsaberTag(int model, boolean stable, double length, double lengthScalar, double radius, int color, List<Vec3> emitterPositions) {
+        this.model = model;
         this.stable = stable;
         this.length = length;
         this.lengthScalar = lengthScalar;
@@ -59,14 +61,15 @@ public class LightsaberTag {
         lT.change(stack);
     }
 
-    private static LightsaberTag create(ItemStack stack) {// TODO MAY BE PROBLEMATIC DOWN THE LINE
-        var lT = LightsaberContent.LIGHTSABER_DATA.getOrDefault(Constants.withId("mace"), TempDefaults.LightsaberTypes.MACE.getData()).toTag();
+    private static LightsaberTag create(ItemStack stack) {
+        var lT = LightsaberContent.LIGHTSABER_DATA.get(Constants.withId("mace")).toTag(2);
         lT.change(stack);
         return lT;
     }
 
-    private void change(ItemStack stack) {
+    public void change(ItemStack stack) {
         var tag = new CompoundTag();
+        tag.putInt(MODEL, model);
         tag.putBoolean(STABLE, stable);
         tag.putDouble(LENGTH, length);
         tag.putDouble(LENGTH_SCALAR, lengthScalar);

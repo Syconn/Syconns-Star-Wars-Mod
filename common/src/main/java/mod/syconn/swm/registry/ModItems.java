@@ -1,11 +1,14 @@
 package mod.syconn.swm.registry;
 
+import dev.architectury.registry.CreativeTabOutput;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import mod.syconn.swm.addons.LightsaberContent;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +28,10 @@ public class ModItems {
 
     public static final RegistrySupplier<CreativeModeTab> TAB = TABS.register("star_wars", () -> CreativeTabRegistry.create(
             Component.translatable("itemGroup." + MOD + ".star_wars"), () -> new ItemStack(LIGHTSABER.get())));
+
+    public static void addCreative(FeatureFlagSet flags, CreativeTabOutput output, boolean canUseGameMasterBlocks) {
+        output.acceptAll(LightsaberContent.getLightsabers());
+    }
 
     @SuppressWarnings("unchecked")
     private static <T extends Item> RegistrySupplier<T> registerItem(String id, Item.Properties properties) {

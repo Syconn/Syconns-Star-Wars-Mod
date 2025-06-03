@@ -11,6 +11,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
 public class JsonResourceReloader<D> extends SimpleJsonResourceReloadListener {
@@ -34,6 +35,10 @@ public class JsonResourceReloader<D> extends SimpleJsonResourceReloadListener {
 
     public Collection<D> all() {
         return resources.values();
+    }
+
+    public Set<Map.Entry<ResourceLocation, D>> sets() {
+        return resources.entrySet();
     }
 
     public D get(ResourceLocation id) {
