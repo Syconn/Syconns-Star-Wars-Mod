@@ -1,7 +1,11 @@
 package mod.syconn.swm.features.lightsaber.data;
 
+import mod.syconn.swm.addons.LightsaberContent;
+import mod.syconn.swm.addons.TempDefaults;
+import mod.syconn.swm.util.Constants;
 import mod.syconn.swm.util.nbt.NbtTools;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -20,22 +24,22 @@ public class LightsaberTag {
     private final String EMITTER_POSITIONS = "emitter_pos";
 
     public boolean stable;
-    public float length;
-    public float lengthScalar;
-    public float radius;
+    public double length;
+    public double lengthScalar;
+    public double radius;
     public int color;
     public List<Vec3> emitterPositions;
 
     private LightsaberTag(CompoundTag tag) {
         this.stable = tag.getBoolean(STABLE);
-        this.length = tag.getFloat(LENGTH);
-        this.lengthScalar = tag.getFloat(LENGTH_SCALAR);
-        this.radius = tag.getFloat(RADIUS);
+        this.length = tag.getDouble(LENGTH);
+        this.lengthScalar = tag.getDouble(LENGTH_SCALAR);
+        this.radius = tag.getDouble(RADIUS);
         this.color = tag.getInt(COLOR);
         this.emitterPositions = NbtTools.getArray(tag.getCompound(EMITTER_POSITIONS), NbtTools::getVec3);
     }
 
-    public LightsaberTag(boolean stable, float length, float lengthScalar, float radius, int color, List<Vec3> emitterPositions) {
+    public LightsaberTag(boolean stable, double length, double lengthScalar, double radius, int color, List<Vec3> emitterPositions) {
         this.stable = stable;
         this.length = length;
         this.lengthScalar = lengthScalar;
@@ -44,29 +48,29 @@ public class LightsaberTag {
         this.emitterPositions = emitterPositions;
     }
 
-    public static LightsaberTag get(ItemStack stack) {
-//        if (!stack.getOrCreateTag().contains(ID)) return create(stack);
+    public static LightsaberTag getOrCreate(ItemStack stack) {
+        if (!stack.getOrCreateTag().contains(ID)) return create(stack);
         return new LightsaberTag(stack.getOrCreateTag().getCompound(ID));
     }
 
     public static void update(ItemStack stack, Consumer<LightsaberTag> consumer) {
-        var lT = get(stack);
+        var lT = getOrCreate(stack);
         consumer.accept(lT);
         lT.change(stack);
     }
 
-//    private static LightsaberTag create(ItemStack stack) {
-//        var lT = LightsaberDefaults.LightsaberTypes.YODA.getData().getTag();
-//        lT.change(stack);
-//        return lT;
-//    }
+    private static LightsaberTag create(ItemStack stack) {// TODO MAY BE PROBLEMATIC DOWN THE LINE
+        var lT = LightsaberContent.LIGHTSABER_DATA.getOrDefault(Constants.withId("yoda"), TempDefaults.LightsaberTypes.MACE.getData()).toTag();
+        lT.change(stack);
+        return lT;
+    }
 
     private void change(ItemStack stack) {
         var tag = new CompoundTag();
         tag.putBoolean(STABLE, stable);
-        tag.putFloat(LENGTH, length);
-        tag.putFloat(LENGTH_SCALAR, lengthScalar);
-        tag.putFloat(RADIUS, radius);
+        tag.putDouble(LENGTH, length);
+        tag.putDouble(LENGTH_SCALAR, lengthScalar);
+        tag.putDouble(RADIUS, radius);
         tag.putInt(COLOR, color);
         tag.put(EMITTER_POSITIONS, NbtTools.putArray(emitterPositions, NbtTools::putVec3));
         stack.getOrCreateTag().put(ID, tag);

@@ -39,4 +39,8 @@ public class JsonResourceReloader<D> extends SimpleJsonResourceReloadListener {
     public D get(ResourceLocation id) {
         return resources.get(id);
     }
+
+    public D getOrDefault(ResourceLocation id, D _default) {
+        return resources.get(id) != null ? resources.get(id) : _default;
+    }
 }

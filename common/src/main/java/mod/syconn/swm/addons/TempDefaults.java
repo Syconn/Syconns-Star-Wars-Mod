@@ -1,4 +1,4 @@
-package mod.syconn.swm.forge.client.data;
+package mod.syconn.swm.addons;
 
 import mod.syconn.swm.features.lightsaber.data.LightsaberData;
 import mod.syconn.swm.util.math.ColorUtil;
@@ -6,7 +6,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class LightsaberDefaults {
+public class TempDefaults {
 
     public static final int GREEN = ColorUtil.packHsv(0.36f, 1f, 0.5f);
     public static final int BLUE = ColorUtil.packHsv(0.6f, 0.85f, 0.5f);

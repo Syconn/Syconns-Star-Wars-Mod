@@ -8,6 +8,10 @@ import java.util.List;
 
 public record LightsaberData(boolean stable, double length, double radius, int color, List<Vec3> emitterPositions) {
 
+    public LightsaberTag toTag() {
+        return new LightsaberTag(stable, length, 1, radius, color, emitterPositions);
+    }
+
     public static LightsaberData fromJson(JsonObject json) {
         return new LightsaberData(json.get("stable").getAsBoolean(), json.get("length").getAsDouble(), json.get("radius").getAsDouble(), json.get("color").getAsInt(),
                 JsonUtils.getArray(json.getAsJsonObject("emitterPositions"), JsonUtils::getVec3));
