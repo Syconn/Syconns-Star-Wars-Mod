@@ -6,7 +6,6 @@ import mod.syconn.swm.features.lightsaber.data.LightsaberDefaults;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import mod.syconn.swm.util.client.render.IItemRenderer;
-import mod.syconn.swm.util.math.ColorUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.LivingEntity;
