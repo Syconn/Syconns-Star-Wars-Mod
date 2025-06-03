@@ -6,6 +6,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 public class TempDefaults {
 
     public static final int GREEN = ColorUtil.packHsv(0.36f, 1f, 0.5f);

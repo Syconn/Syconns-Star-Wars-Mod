@@ -60,7 +60,7 @@ public class LightsaberTag {
     }
 
     private static LightsaberTag create(ItemStack stack) {// TODO MAY BE PROBLEMATIC DOWN THE LINE
-        var lT = LightsaberContent.LIGHTSABER_DATA.getOrDefault(Constants.withId("yoda"), TempDefaults.LightsaberTypes.MACE.getData()).toTag();
+        var lT = LightsaberContent.LIGHTSABER_DATA.getOrDefault(Constants.withId("mace"), TempDefaults.LightsaberTypes.MACE.getData()).toTag();
         lT.change(stack);
         return lT;
     }

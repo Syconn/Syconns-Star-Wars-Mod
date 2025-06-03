@@ -13,7 +13,5 @@ public class StarWarsClient {
 
     public static void init() {
         IItemRenderer.register(LightsaberItem.class, new LightsaberItemRender());
-
-        ReloadListenerRegistry.register(PackType.CLIENT_RESOURCES, LightsaberContent.LIGHTSABER_DATA);
     }
 }
