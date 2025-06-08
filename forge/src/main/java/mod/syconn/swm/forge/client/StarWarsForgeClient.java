@@ -11,8 +11,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(modid = Constants.MOD, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class StarWarsForgeClient {
 
-    public static void init(final FMLClientSetupEvent event) {
-        StarWarsClient.init();
+    public static void setupEvent(final FMLClientSetupEvent setupEvent) {
+        StarWarsClient.setup();
     }
 
     @SubscribeEvent

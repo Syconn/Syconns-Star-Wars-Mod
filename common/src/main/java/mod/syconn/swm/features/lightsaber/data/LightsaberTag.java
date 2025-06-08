@@ -36,7 +36,7 @@ public class LightsaberTag {
     public int color;
     public List<Vec3> emitterPositions;
 
-    private LightsaberTag(CompoundTag tag) {
+    public LightsaberTag(CompoundTag tag) {
         this.model = tag.getInt(MODEL);
         this.stable = tag.getBoolean(STABLE);
         this.active = tag.getBoolean(ACTIVE);
@@ -66,10 +66,10 @@ public class LightsaberTag {
         return new LightsaberTag(stack.getOrCreateTag().getCompound(ID));
     }
 
-    public static void update(ItemStack stack, Consumer<LightsaberTag> consumer) {
+    public static ItemStack update(ItemStack stack, Consumer<LightsaberTag> consumer) {
         var lT = getOrCreate(stack);
         consumer.accept(lT);
-        lT.change(stack);
+        return lT.change(stack);
     }
 
     private static LightsaberTag create(ItemStack stack) {
@@ -78,7 +78,7 @@ public class LightsaberTag {
         return lT;
     }
 
-    public void change(ItemStack stack) {
+    public CompoundTag save() {
         var tag = new CompoundTag();
         tag.putInt(MODEL, model);
         tag.putBoolean(STABLE, stable);
@@ -89,7 +89,12 @@ public class LightsaberTag {
         tag.putDouble(RADIUS, radius);
         tag.putInt(COLOR, color);
         tag.put(EMITTER_POSITIONS, NbtTools.putArray(emitterPositions, NbtTools::putVec3));
-        stack.getOrCreateTag().put(ID, tag);
+        return tag;
+    }
+
+    public ItemStack change(ItemStack stack) {
+        stack.getOrCreateTag().put(ID, save());
+        return stack;
     }
 
     public void toggle() {

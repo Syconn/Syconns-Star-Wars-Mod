@@ -1,6 +1,8 @@
 package mod.syconn.swm.network;
 
 import dev.architectury.networking.NetworkChannel;
+import mod.syconn.swm.features.lightsaber.entity.ThrownLightsaber;
+import mod.syconn.swm.network.packets.ThrowLightsaberPacket;
 import mod.syconn.swm.network.packets.ToggleLightsaberPacket;
 import mod.syconn.swm.util.Constants;
 
@@ -10,5 +12,6 @@ public class Network {
 
     public static void init() {
         CHANNEL.register(ToggleLightsaberPacket.class, ToggleLightsaberPacket::encode, ToggleLightsaberPacket::new, ToggleLightsaberPacket::apply);
+        CHANNEL.register(ThrowLightsaberPacket.class, ThrowLightsaberPacket::encode, ThrowLightsaberPacket::new, ThrowLightsaberPacket::apply);
     }
 }

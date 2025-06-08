@@ -1,4 +1,4 @@
-package mod.syconn.swm.registry;
+package mod.syconn.swm.core;
 
 import mod.syconn.swm.util.Constants;
 import net.minecraft.core.registries.Registries;

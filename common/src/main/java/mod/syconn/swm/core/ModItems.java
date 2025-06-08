@@ -1,4 +1,4 @@
-package mod.syconn.swm.registry;
+package mod.syconn.swm.core;
 
 import dev.architectury.registry.CreativeTabOutput;
 import dev.architectury.registry.CreativeTabRegistry;
@@ -12,7 +12,6 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

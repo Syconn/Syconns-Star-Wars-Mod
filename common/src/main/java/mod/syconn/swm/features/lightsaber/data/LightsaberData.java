@@ -1,7 +1,7 @@
 package mod.syconn.swm.features.lightsaber.data;
 
 import com.google.gson.JsonObject;
-import mod.syconn.swm.registry.ModItems;
+import mod.syconn.swm.core.ModItems;
 import mod.syconn.swm.util.json.JsonUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -21,15 +21,13 @@ public record LightsaberData(int model, boolean stable, double length, double ra
 
     public ItemStack toItem() {
         var stack = new ItemStack(ModItems.LIGHTSABER.get());
-        toTag().change(stack);
-        return stack;
+        return toTag().change(stack);
     }
 
     public ItemStack toItem(String name) {
         var stack = new ItemStack(ModItems.LIGHTSABER.get());
-        toTag().change(stack);
         stack.setHoverName(Component.literal(name.substring(0, 1).toUpperCase() + name.substring(1) + " Lightsaber"));
-        return stack;
+        return toTag().change(stack);
     }
 
     public static LightsaberData fromJson(JsonObject json) {

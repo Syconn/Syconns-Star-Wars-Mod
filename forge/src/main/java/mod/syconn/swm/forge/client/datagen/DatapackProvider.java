@@ -1,6 +1,6 @@
 package mod.syconn.swm.forge.client.datagen;
 
-import mod.syconn.swm.registry.ModTags;
+import mod.syconn.swm.core.ModTags;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;

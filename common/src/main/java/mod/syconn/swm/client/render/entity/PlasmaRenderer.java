@@ -150,7 +150,6 @@ public class PlasmaRenderer {
 
         var deltaThickness = radius * 0.0028f;
         var minOutputLayer = mL * thicknessBottom / deltaThickness;
-//        var globalTime = ((System.currentTimeMillis()) % Integer.MAX_VALUE) / 4f;
         var globalTime = StarWarsClient.getTickDelta();
 
         for (var layer = mL; layer <= xL; layer++) {
