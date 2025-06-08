@@ -5,6 +5,7 @@ import mod.syconn.swm.StarWars;
 import mod.syconn.swm.forge.client.StarWarsForgeClient;
 import mod.syconn.swm.util.Constants;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.extensions.IForgeItem;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;

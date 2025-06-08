@@ -38,7 +38,7 @@ public class ThrownLightsaberRenderer extends EntityRenderer<ThrownLightsaber> {
         poseStack.mulPose(new Quaternionf().rotationX((float)(Math.PI / 2) - bPitch));
         poseStack.mulPose(new Quaternionf().rotationZ(MathUtil.toRadians(-(entity.tickCount + partialTick) * 31)));
 
-        this.itemRenderer.renderStatic(entity.getItem(), ItemDisplayContext.NONE, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
+        this.itemRenderer.renderStatic(entity.getThrownItem(), ItemDisplayContext.NONE, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
 
         poseStack.popPose();
     }

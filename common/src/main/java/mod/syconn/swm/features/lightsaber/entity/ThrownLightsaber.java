@@ -12,9 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -49,7 +47,7 @@ public class ThrownLightsaber extends ThrowableProjectile {
             if (this.distanceTo(getOwner()) >= 8) this.returning = true;
 
             if (this.distanceTo(getOwner()) <= 2.5f && !this.level().isClientSide && returning) {
-                if (this.getOwner() instanceof Player player && !player.isCreative()) player.getInventory().add(this.getItem());
+                if (this.getOwner() instanceof Player player && !player.isCreative()) player.getInventory().add(this.getReturnItem());
                 this.discard();
             }
         }
@@ -68,13 +66,19 @@ public class ThrownLightsaber extends ThrowableProjectile {
         super.tick();
     }
 
-    public ItemStack getItem() {
+    public ItemStack getThrownItem() {
         var stack = new ItemStack(ModItems.LIGHTSABER.get());
         new LightsaberTag(this.entityData.get(LIGHTSABER_DATA)).change(stack);
         return LightsaberTag.update(stack, tag -> {
             tag.transition = -8;
             tag.active = true;
         });
+    }
+
+    public ItemStack getReturnItem() {
+        var stack = new ItemStack(ModItems.LIGHTSABER.get());
+        new LightsaberTag(this.entityData.get(LIGHTSABER_DATA)).change(stack);
+        return LightsaberTag.update(stack, LightsaberTag::toggle);
     }
 
     public boolean isNoGravity() {
@@ -89,7 +93,7 @@ public class ThrownLightsaber extends ThrowableProjectile {
         var entity2 = this.getOwner();
         var damageSource = ModDamageSources.lightsaber(level());
         var soundEvent = SoundEvents.TRIDENT_HIT; // TODO CHANGE THIS TOO
-        if (entity.hurt(damageSource, f)) {
+        if (entity2 != entity && entity.hurt(damageSource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) return;
 
             if (entity instanceof LivingEntity livingEntity2) {

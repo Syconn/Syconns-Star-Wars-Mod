@@ -31,7 +31,7 @@ public class PlasmaRenderer {
     public static void renderPlasma(PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay, boolean unstable, float length, float lengthScalar, float radius, boolean cap, int glowHsv) {
         final VertexConsumer vc = bufferSource.getBuffer(PLASMA);
 
-        var totalLength = length * lengthScalar;
+        var totalLength = length * lengthScalar * 1.3f;
         var shake = (1.1f - lengthScalar) * 0.004f;
 
         if (unstable) shake *= 2;
