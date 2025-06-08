@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "client": [
     "ItemRendererMixin",
-    "LevelRendererMixin"
+    "LevelRendererMixin",
+    "MinecraftClientAccessor"
   ],
   "mixins": [
   ],

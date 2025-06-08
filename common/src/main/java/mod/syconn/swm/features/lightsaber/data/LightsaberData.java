@@ -12,11 +12,11 @@ import java.util.List;
 public record LightsaberData(int model, boolean stable, double length, double radius, int color, List<Vec3> emitterPositions) {
 
     public LightsaberTag toTag() {
-        return new LightsaberTag(model, stable, length, 1, radius, color, emitterPositions);
+        return new LightsaberTag(model, stable, false, (byte) 0, length, 1, radius, color, emitterPositions);
     }
 
     public LightsaberTag toTag(double lengthScalar) {
-        return new LightsaberTag(model, stable, length, lengthScalar, radius, color, emitterPositions);
+        return new LightsaberTag(model, stable, false, (byte) 0, length, lengthScalar, radius, color, emitterPositions);
     }
 
     public ItemStack toItem() {

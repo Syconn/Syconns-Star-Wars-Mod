@@ -1,6 +1,7 @@
 package mod.syconn.swm.features.lightsaber.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import mod.syconn.swm.client.StarWarsClient;
 import mod.syconn.swm.client.render.entity.PlasmaRenderer;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
@@ -32,7 +33,7 @@ public class LightsaberItemRender implements IItemRenderer {
         if (renderMode != ItemDisplayContext.GUI) {
             var handPos = !lT.emitterPositions.isEmpty() ? lT.emitterPositions.get(0) : new Vec3(0, 0, 0);
             poseStack.translate(-handPos.x, -handPos.y, -handPos.z);
-            PlasmaRenderer.renderPlasma(poseStack, bufferSource, light, overlay, !lT.stable, (float) lT.length, (float) lT.lengthScalar, (float) lT.radius, true, lT.color);
+            PlasmaRenderer.renderPlasma(poseStack, bufferSource, light, overlay, !lT.stable, lT.getSize(StarWarsClient.getTickDelta()), (float) lT.lengthScalar, (float) lT.radius, true, lT.color);
         }
     }
 }

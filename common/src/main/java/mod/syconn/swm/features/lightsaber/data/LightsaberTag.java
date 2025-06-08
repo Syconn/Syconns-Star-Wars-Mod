@@ -2,6 +2,7 @@ package mod.syconn.swm.features.lightsaber.data;
 
 import mod.syconn.swm.addons.LightsaberContent;
 import mod.syconn.swm.util.Constants;
+import mod.syconn.swm.util.math.Ease;
 import mod.syconn.swm.util.nbt.NbtTools;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -13,9 +14,12 @@ import java.util.function.Consumer;
 public class LightsaberTag {
 
     private static final String ID = "lightsaberData";
+    private static final byte TRANSITION_TICKS = 8;
 
     private final String MODEL = "model";
     private final String STABLE = "stable";
+    private final String ACTIVE = "active";
+    private final String TRANSITION = "transition";
     private final String LENGTH = "length";
     private final String LENGTH_SCALAR = "length_scalar";
     private final String RADIUS = "radius";
@@ -24,6 +28,8 @@ public class LightsaberTag {
 
     public int model;
     public boolean stable;
+    public boolean active;
+    public byte transition;
     public double length;
     public double lengthScalar;
     public double radius;
@@ -33,6 +39,8 @@ public class LightsaberTag {
     private LightsaberTag(CompoundTag tag) {
         this.model = tag.getInt(MODEL);
         this.stable = tag.getBoolean(STABLE);
+        this.active = tag.getBoolean(ACTIVE);
+        this.transition = tag.getByte(TRANSITION);
         this.length = tag.getDouble(LENGTH);
         this.lengthScalar = tag.getDouble(LENGTH_SCALAR);
         this.radius = tag.getDouble(RADIUS);
@@ -40,9 +48,12 @@ public class LightsaberTag {
         this.emitterPositions = NbtTools.getArray(tag.getCompound(EMITTER_POSITIONS), NbtTools::getVec3);
     }
 
-    public LightsaberTag(int model, boolean stable, double length, double lengthScalar, double radius, int color, List<Vec3> emitterPositions) {
+    public LightsaberTag(int model, boolean stable, boolean active, byte transition, double length, double lengthScalar, double radius,
+                         int color, List<Vec3> emitterPositions) {
         this.model = model;
         this.stable = stable;
+        this.active = active;
+        this.transition = transition;
         this.length = length;
         this.lengthScalar = lengthScalar;
         this.radius = radius;
@@ -71,11 +82,32 @@ public class LightsaberTag {
         var tag = new CompoundTag();
         tag.putInt(MODEL, model);
         tag.putBoolean(STABLE, stable);
+        tag.putBoolean(ACTIVE, active);
+        tag.putByte(TRANSITION, transition);
         tag.putDouble(LENGTH, length);
         tag.putDouble(LENGTH_SCALAR, lengthScalar);
         tag.putDouble(RADIUS, radius);
         tag.putInt(COLOR, color);
         tag.put(EMITTER_POSITIONS, NbtTools.putArray(emitterPositions, NbtTools::putVec3));
         stack.getOrCreateTag().put(ID, tag);
+    }
+
+    public void toggle() {
+        System.out.println("toggling");
+
+        if (transition != 0) return;
+        transition = !active ? -TRANSITION_TICKS : TRANSITION_TICKS;
+        active = !active;
+    }
+
+    public void tick() {
+        if (transition > 0) transition--;
+        if (transition < 0) transition++;
+    }
+
+    public float getSize(float partialTicks) {
+        if (transition == 0) return !active ? 1 : 0;
+        if (transition > 0) return Ease.outCubic(1 - (transition - partialTicks) / TRANSITION_TICKS);
+        return Ease.inCubic(-(transition + partialTicks) / TRANSITION_TICKS);
     }
 }

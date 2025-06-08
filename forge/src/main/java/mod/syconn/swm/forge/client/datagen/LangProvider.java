@@ -1,6 +1,7 @@
 package mod.syconn.swm.forge.client.datagen;
 
 import mod.syconn.swm.registry.ModItems;
+import mod.syconn.swm.registry.ModKeys;
 import mod.syconn.swm.util.Constants;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -15,6 +16,9 @@ public class LangProvider extends LanguageProvider {
 
     protected void addTranslations() {
         add("itemGroup." + MOD + ".star_wars", "Star Wars");
+
+        add(ModKeys.modCategory(), "Star Wars Controls");
+        add("swm.key.toggle", "Toggle Held Item");
 
         addItem(ModItems.LIGHTSABER, "Lightsaber");
     }
