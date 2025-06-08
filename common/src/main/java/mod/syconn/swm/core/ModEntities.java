@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 
 import java.util.function.Supplier;
 
@@ -21,7 +21,7 @@ public class ModEntities {
         return ENTITIES.register(name, () -> EntityType.Builder.of(entity,mobCategory).sized(width, height).build(name));
     }
 
-    private static <T extends AbstractArrow> Supplier<EntityType<T>> registerProjectile(String name, EntityType.EntityFactory<T> entity) {
+    private static <T extends Projectile> Supplier<EntityType<T>> registerProjectile(String name, EntityType.EntityFactory<T> entity) {
         return ENTITIES.register(name, () -> EntityType.Builder.of(entity, MobCategory.MISC).sized(.5f, .5f).clientTrackingRange(4).updateInterval(10).build(name));
     }
 }

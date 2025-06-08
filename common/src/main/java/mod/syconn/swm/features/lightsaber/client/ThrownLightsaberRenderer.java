@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
 import org.joml.Quaternionf;
 
 public class ThrownLightsaberRenderer extends EntityRenderer<ThrownLightsaber> {
@@ -35,13 +34,11 @@ public class ThrownLightsaberRenderer extends EntityRenderer<ThrownLightsaber> {
         var bYaw = (float) Math.atan2(velocity.x, velocity.z);
         var bPitch = (float) Math.asin(velocity.y);
 
-        ItemStack stack = entity.getItem();
-
         poseStack.mulPose(new Quaternionf().rotationY(bYaw));
         poseStack.mulPose(new Quaternionf().rotationX((float)(Math.PI / 2) - bPitch));
         poseStack.mulPose(new Quaternionf().rotationZ(MathUtil.toRadians(-(entity.tickCount + partialTick) * 31)));
 
-        this.itemRenderer.renderStatic(stack, ItemDisplayContext.NONE, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
+        this.itemRenderer.renderStatic(entity.getItem(), ItemDisplayContext.NONE, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, entity.level(), entity.getId());
 
         poseStack.popPose();
     }

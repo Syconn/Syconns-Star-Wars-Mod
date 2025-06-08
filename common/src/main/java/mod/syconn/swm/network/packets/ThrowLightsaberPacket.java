@@ -32,7 +32,7 @@ public class ThrowLightsaberPacket {
             if (player != null) {
                 ThrownLightsaber thrownLightsaber = new ThrownLightsaber(player.level(), player, player.getItemInHand(hand));
                 thrownLightsaber.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
-                if (player.getAbilities().instabuild) thrownLightsaber.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+//                if (player.getAbilities().instabuild) thrownLightsaber.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                 player.level().addFreshEntity(thrownLightsaber);
             }
         });
