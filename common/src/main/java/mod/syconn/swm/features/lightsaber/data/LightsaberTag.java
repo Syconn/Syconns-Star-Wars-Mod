@@ -93,8 +93,6 @@ public class LightsaberTag {
     }
 
     public void toggle() {
-        System.out.println("toggling");
-
         if (transition != 0) return;
         transition = !active ? -TRANSITION_TICKS : TRANSITION_TICKS;
         active = !active;

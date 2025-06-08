@@ -32,7 +32,6 @@ public class ToggleLightsaberPacket {
 
             if (player != null) {
                 ItemStack stack = player.getItemInHand(hand);
-
                 if (stack.getItem() instanceof LightsaberItem) LightsaberTag.update(stack, LightsaberTag::toggle);
             }
         });

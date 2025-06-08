@@ -18,7 +18,7 @@ public class LangProvider extends LanguageProvider {
         add("itemGroup." + MOD + ".star_wars", "Star Wars");
 
         add(ModKeys.modCategory(), "Star Wars Controls");
-        add("swm.key.toggle", "Toggle Held Item");
+        add("key.swm.toggle", "Toggle Held Item");
 
         addItem(ModItems.LIGHTSABER, "Lightsaber");
     }

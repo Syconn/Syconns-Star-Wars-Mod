@@ -1,4 +1,6 @@
 {
+  "item.swm.lightsaber": "Lightsaber",
   "itemGroup.swm.star_wars": "Star Wars",
-  "item.swm.lightsaber": "Lightsaber"
+  "key.categories.swm": "Star Wars Controls",
+  "swm.key.toggle": "Toggle Held Item"
 }

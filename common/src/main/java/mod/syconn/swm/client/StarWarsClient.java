@@ -6,7 +6,6 @@ import mod.syconn.swm.client.keys.KeyHandler;
 import mod.syconn.swm.features.lightsaber.client.LightsaberItemRender;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
-import mod.syconn.swm.mixin.MinecraftClientAccessor;
 import mod.syconn.swm.registry.ModItems;
 import mod.syconn.swm.registry.ModKeys;
 import mod.syconn.swm.util.Constants;
@@ -30,9 +29,6 @@ public class StarWarsClient {
     }
 
     public static float getTickDelta() {
-        var mc = Minecraft.getInstance();
-        if (mc.isPaused())
-            return ((MinecraftClientAccessor)mc).getPausedTickDelta();
-        return mc.getDeltaFrameTime();
+        return Minecraft.getInstance().getDeltaFrameTime();
     }
 }

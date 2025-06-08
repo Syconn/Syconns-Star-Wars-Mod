@@ -1,5 +1,4 @@
 {
-  "model": 2,
   "color": 13434751,
   "emitterPositions": {
     "0": {
@@ -9,6 +8,7 @@
     }
   },
   "length": 1.4,
+  "model": 2,
   "radius": 1.0,
   "stable": true
 }
