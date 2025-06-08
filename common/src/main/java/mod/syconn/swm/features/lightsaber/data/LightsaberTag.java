@@ -11,7 +11,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class LightsaberTag {
+public class LightsaberTag { // TODO ACTIVE SEEMS TO BE FLIPPED SOME REASON
 
     private static final String ID = "lightsaberData";
     private static final byte TRANSITION_TICKS = 8;
@@ -99,7 +99,7 @@ public class LightsaberTag {
 
     public void toggle() {
         if (transition != 0) return;
-        transition = !active ? -TRANSITION_TICKS : TRANSITION_TICKS;
+        transition = active ? -TRANSITION_TICKS : TRANSITION_TICKS;
         active = !active;
     }
 
@@ -109,7 +109,7 @@ public class LightsaberTag {
     }
 
     public float getSize(float partialTicks) {
-        if (transition == 0) return !active ? 1 : 0;
+        if (transition == 0) return active ? 1 : 0;
         if (transition > 0) return Ease.outCubic(1 - (transition - partialTicks) / TRANSITION_TICKS);
         return Ease.inCubic(-(transition + partialTicks) / TRANSITION_TICKS);
     }

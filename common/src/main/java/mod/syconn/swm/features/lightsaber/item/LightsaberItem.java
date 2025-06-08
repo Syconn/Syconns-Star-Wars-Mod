@@ -39,7 +39,7 @@ public class LightsaberItem extends Item implements IItemExtensions {
     }
 
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(ItemStack stack, EquipmentSlot slot) {
-        var damage = !LightsaberTag.getOrCreate(stack).active ? 7.0f : 0.0f;
+        var damage = LightsaberTag.getOrCreate(stack).active ? 7.0f : 0.0f;
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", damage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", -2.4, AttributeModifier.Operation.ADDITION));

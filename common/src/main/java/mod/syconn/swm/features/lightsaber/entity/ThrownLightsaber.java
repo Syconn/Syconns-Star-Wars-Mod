@@ -47,7 +47,7 @@ public class ThrownLightsaber extends ThrowableProjectile {
             if (this.distanceTo(getOwner()) >= 8) this.returning = true;
 
             if (this.distanceTo(getOwner()) <= 2.5f && !this.level().isClientSide && returning) {
-                if (this.getOwner() instanceof Player player && !player.isCreative()) player.getInventory().add(this.getReturnItem());
+                if (this.getOwner() instanceof Player player && !player.isCreative()) player.getInventory().add(this.getItem());
                 this.discard();
             }
         }
@@ -66,19 +66,8 @@ public class ThrownLightsaber extends ThrowableProjectile {
         super.tick();
     }
 
-    public ItemStack getThrownItem() {
-        var stack = new ItemStack(ModItems.LIGHTSABER.get());
-        new LightsaberTag(this.entityData.get(LIGHTSABER_DATA)).change(stack);
-        return LightsaberTag.update(stack, tag -> {
-            tag.transition = -8;
-            tag.active = true;
-        });
-    }
-
-    public ItemStack getReturnItem() {
-        var stack = new ItemStack(ModItems.LIGHTSABER.get());
-        new LightsaberTag(this.entityData.get(LIGHTSABER_DATA)).change(stack);
-        return LightsaberTag.update(stack, LightsaberTag::toggle);
+    public ItemStack getItem() {
+        return LightsaberTag.update(new LightsaberTag(this.entityData.get(LIGHTSABER_DATA)).change(new ItemStack(ModItems.LIGHTSABER.get())), tag -> tag.active = true);
     }
 
     public boolean isNoGravity() {
