@@ -1,14 +1,12 @@
 package mod.syconn.swm.client.keys;
 
-import mod.syconn.swm.features.lightsaber.entity.ThrownLightsaber;
+import mod.syconn.swm.core.ModKeys;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import mod.syconn.swm.network.Network;
 import mod.syconn.swm.network.packets.ThrowLightsaberPacket;
 import mod.syconn.swm.network.packets.ToggleLightsaberPacket;
-import mod.syconn.swm.core.ModKeys;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.TridentItem;
 
 public class KeyHandler {
 

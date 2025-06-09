@@ -1,5 +1,6 @@
 package mod.syconn.swm.forge;
 
+import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.platform.forge.EventBuses;
 import mod.syconn.swm.StarWars;
 import mod.syconn.swm.forge.client.StarWarsForgeClient;

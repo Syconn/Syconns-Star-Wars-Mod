@@ -3,13 +3,16 @@ package mod.syconn.swm.features.lightsaber.data;
 import com.google.gson.JsonObject;
 import mod.syconn.swm.core.ModItems;
 import mod.syconn.swm.util.json.JsonUtils;
+import mod.syconn.swm.util.nbt.ISerializable;
+import mod.syconn.swm.util.nbt.NbtTools;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public record LightsaberData(int model, boolean stable, double length, double radius, int color, List<Vec3> emitterPositions) {
+public record LightsaberData(int model, boolean stable, double length, double radius, int color, List<Vec3> emitterPositions) implements ISerializable<CompoundTag> {
 
     public LightsaberTag toTag() {
         return new LightsaberTag(model, stable, true, (byte) 0, length, 1, radius, color, emitterPositions);
@@ -44,5 +47,21 @@ public record LightsaberData(int model, boolean stable, double length, double ra
         json.addProperty("color", color);
         json.add("emitterPositions", JsonUtils.addArray(emitterPositions, JsonUtils::addVec3));
         return json;
+    }
+
+    public static LightsaberData readTag(CompoundTag tag) {
+        return new LightsaberData(tag.getInt("model"), tag.getBoolean("stable"), tag.getDouble("length"), tag.getDouble("radius"), tag.getInt("color"),
+                NbtTools.getArray(tag.getCompound("vectors"), NbtTools::getVec3));
+    }
+
+    public CompoundTag writeTag() {
+        var tag = new CompoundTag();
+        tag.putInt("model", this.model);
+        tag.putBoolean("stable", this.stable);
+        tag.putDouble("length", this.length);
+        tag.putDouble("radius", this.radius);
+        tag.putInt("color", this.color);
+        tag.put("vectors", NbtTools.putArray(this.emitterPositions, NbtTools::putVec3));
+        return tag;
     }
 }

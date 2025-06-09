@@ -1,7 +1,6 @@
 package mod.syconn.swm.features.lightsaber.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.features.lightsaber.entity.ThrownLightsaber;
 import mod.syconn.swm.util.math.MathUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
