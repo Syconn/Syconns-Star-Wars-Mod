@@ -11,15 +11,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.UUID;
 
 public record LightsaberData(int model, boolean stable, double length, double radius, int color, List<Vec3> emitterPositions) implements ISerializable<CompoundTag> {
 
     public LightsaberTag toTag() {
-        return new LightsaberTag(model, stable, true, (byte) 0, length, 1, radius, color, emitterPositions);
+        return new LightsaberTag(UUID.randomUUID(), model, stable, true, (byte) 0, length, 1, radius, color, emitterPositions);
     }
 
     public LightsaberTag toTag(double lengthScalar) {
-        return new LightsaberTag(model, stable, true, (byte) 0, length, lengthScalar, radius, color, emitterPositions);
+        return new LightsaberTag(UUID.randomUUID(), model, stable, true, (byte) 0, length, lengthScalar, radius, color, emitterPositions);
     }
 
     public ItemStack toItem() {

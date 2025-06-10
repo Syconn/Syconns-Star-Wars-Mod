@@ -33,38 +33,42 @@ public class ItemInHandRendererMixin {
     @Shadow
     private float offHandHeight;
 
-    @Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "tick", at = @At(value = "HEAD"))
     private void tick(CallbackInfo cir) {
-        LocalPlayer localPlayer = this.minecraft.player;
+        var localPlayer = this.minecraft.player;
         if (localPlayer != null) {
-            ItemStack itemStack = localPlayer.getMainHandItem();
-            ItemStack itemStack2 = localPlayer.getOffhandItem();
+            var itemStack = localPlayer.getMainHandItem();
+            var itemStack2 = localPlayer.getOffhandItem();
 
-            if (itemStack.getItem() instanceof IItemExtensions || itemStack2.getItem() instanceof IItemExtensions) {
+            if (itemStack.getItem() instanceof IItemExtensions) {
                 this.oMainHandHeight = this.mainHandHeight;
-                this.oOffHandHeight = this.offHandHeight;
 
                 if (ItemStack.matches(this.mainHandItem, itemStack)) this.mainHandItem = itemStack;
-                if (ItemStack.matches(this.offHandItem, itemStack2))this.offHandItem = itemStack2;
 
-                if (localPlayer.isHandsBusy()) {
-                    this.mainHandHeight = Mth.clamp(this.mainHandHeight - 0.4f, 0.0f, 1.0f);
-                    this.offHandHeight = Mth.clamp(this.offHandHeight - 0.4f, 0.0f, 1.0f);
-                } else {
-                    float f = localPlayer.getAttackStrengthScale(1.0f);
-                    boolean reequipM = RenderUtil.handleReequipAnimation(this.mainHandItem, itemStack, localPlayer.getInventory().selected);
-                    boolean reequipO = RenderUtil.handleReequipAnimation(this.offHandItem, itemStack2, -1);
-
+                if (localPlayer.isHandsBusy()) this.mainHandHeight = Mth.clamp(this.mainHandHeight - 0.4f, 0.0f, 1.0f);
+                else {
+                    var f = localPlayer.getAttackStrengthScale(1.0f);
+                    var reequipM = RenderUtil.handleReequipAnimation(this.mainHandItem, itemStack, localPlayer.getInventory().selected);
                     if (!reequipM && this.mainHandItem != itemStack) this.mainHandItem = itemStack;
-                    if (!reequipO && this.offHandItem != itemStack2) this.offHandItem = itemStack2;
-
                     this.mainHandHeight += Mth.clamp((!reequipM ? f * f * f : 0.0f) - this.mainHandHeight, -0.4f, 0.4f);
-                    this.offHandHeight += Mth.clamp((float)(!reequipO ? 1 : 0) - this.offHandHeight, -0.4f, 0.4f);
                 }
 
                 if (this.mainHandHeight < 0.1F) this.mainHandItem = itemStack;
+            }
+
+            if (itemStack2.getItem() instanceof IItemExtensions) {
+                this.oOffHandHeight = this.offHandHeight;
+
+                if (ItemStack.matches(this.offHandItem, itemStack2))this.offHandItem = itemStack2;
+
+                if (localPlayer.isHandsBusy()) this.offHandHeight = Mth.clamp(this.offHandHeight - 0.4f, 0.0f, 1.0f);
+                else {
+                    var reequipO = RenderUtil.handleReequipAnimation(this.offHandItem, itemStack2, -1);
+                    if (!reequipO && this.offHandItem != itemStack2) this.offHandItem = itemStack2;
+                    this.offHandHeight += Mth.clamp((float)(!reequipO ? 1 : 0) - this.offHandHeight, -0.4f, 0.4f);
+                }
+
                 if (this.offHandHeight < 0.1F) this.offHandItem = itemStack2;
-                cir.cancel();
             }
         }
     }

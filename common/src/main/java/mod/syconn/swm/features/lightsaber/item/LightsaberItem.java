@@ -45,14 +45,7 @@ public class LightsaberItem extends Item implements IItemExtensions {
 
     @Override
     public boolean shouldCauseReequipAnimation(@NotNull ItemStack from, @NotNull ItemStack to, boolean changed) {
-//        if (!(original.getItem() instanceof LightsaberItem && original.getItem() == updated.getItem())) TODO
-//            return false;
-//
-//        var origTag = new LightsaberTag(original.getOrCreateNbt());
-//        var newTag = new LightsaberTag(updated.getOrCreateNbt());
-//
-//        return origTag.uid == newTag.uid;
-        return false;
+        return LightsaberTag.identical(from, to);
     }
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
