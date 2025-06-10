@@ -12,6 +12,7 @@ import mod.syconn.swm.features.lightsaber.client.LightsaberItemRender;
 import mod.syconn.swm.features.lightsaber.client.ThrownLightsaberRenderer;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
+import mod.syconn.swm.network.Network;
 import mod.syconn.swm.util.Constants;
 import mod.syconn.swm.util.client.render.IModifiedItemRenderer;
 import mod.syconn.swm.util.client.render.IModifiedPoseRenderer;
@@ -34,6 +35,8 @@ public class StarWarsClient {
         EntityRendererRegistry.register(ModEntities.THROWN_LIGHTSABER, ThrownLightsaberRenderer::new);
 
         TickEvent.PLAYER_PRE.register(StarWarsClient::onClientTick);
+
+        Network.registerC2S();
     }
 
     public static void setup() {

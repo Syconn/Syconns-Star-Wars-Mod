@@ -1,5 +1,6 @@
 package mod.syconn.swm.util.server;
 
+import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import mod.syconn.swm.network.Network;
 import mod.syconn.swm.network.packets.SyncResourceDataPacket;
@@ -19,7 +20,7 @@ public class SyncedResourceManager {
     }
 
     public static void handleJoin(ServerPlayer player) {
-        SYNCED_DATA.forEach((id, data) -> Network.CHANNEL.sendToPlayer(player, new SyncResourceDataPacket(id, data.writeData(new FriendlyByteBuf(Unpooled.buffer())))));
+        SYNCED_DATA.forEach((id, data) -> NetworkManager.sendToPlayer(player, new SyncResourceDataPacket(id, data.writeData(new FriendlyByteBuf(Unpooled.buffer())))));
     }
 
     public static ISyncedData getLoginDataSupplier(ResourceLocation id) {

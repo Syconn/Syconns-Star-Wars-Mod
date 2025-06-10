@@ -12,13 +12,11 @@ import mod.syconn.swm.network.Network;
 import mod.syconn.swm.server.StarWarsServer;
 import net.minecraft.server.packs.PackType;
 
-public final class StarWars {
+public final class StarWars { // TODO DATAGEN SYSTEM IN NEO
     public static void init() {
         ModItems.ITEMS.register();
         ModItems.TABS.register();
         ModEntities.ENTITIES.register();
-
-        Network.init();
 
         CreativeTabRegistry.modify(ModItems.TAB, ModItems::addCreative);
 

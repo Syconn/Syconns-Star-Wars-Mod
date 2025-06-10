@@ -5,6 +5,7 @@ import mod.syconn.swm.features.lightsaber.data.LightsaberData;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.util.Constants;
 import mod.syconn.swm.util.json.JsonResourceReloader;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;

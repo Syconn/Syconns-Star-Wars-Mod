@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.netty.buffer.ByteBuf;
 import mod.syconn.swm.util.nbt.ISerializable;
 import mod.syconn.swm.util.server.SyncedResourceManager;
 import net.minecraft.nbt.CompoundTag;
