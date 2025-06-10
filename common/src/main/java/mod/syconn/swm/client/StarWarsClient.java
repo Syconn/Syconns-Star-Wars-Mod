@@ -12,7 +12,8 @@ import mod.syconn.swm.features.lightsaber.client.ThrownLightsaberRenderer;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import mod.syconn.swm.util.Constants;
-import mod.syconn.swm.util.client.render.IItemRenderer;
+import mod.syconn.swm.util.client.render.IModifiedItemRenderer;
+import mod.syconn.swm.util.client.render.IModifiedPoseRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -22,7 +23,9 @@ import net.minecraft.world.entity.player.Player;
 public class StarWarsClient {
 
     public static void init() {
-        IItemRenderer.register(LightsaberItem.class, new LightsaberItemRender());
+        IModifiedItemRenderer.register(LightsaberItem.class, new LightsaberItemRender());
+
+        IModifiedPoseRenderer.register(LightsaberItem.class, new LightsaberItemRender());
 
         KeyMappingRegistry.register(ModKeys.TOGGLE_ITEM);
         KeyMappingRegistry.register(ModKeys.POWER_1);

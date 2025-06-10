@@ -11,11 +11,11 @@ import net.minecraft.world.item.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-public interface IItemRenderer {
+public interface IModifiedItemRenderer {
 
-    Map<Class<? extends Item>, IItemRenderer> INSTANCES = new HashMap<>();
+    Map<Class<? extends Item>, IModifiedItemRenderer> INSTANCES = new HashMap<>();
 
-    static void register(Class<? extends Item> clazz, IItemRenderer renderer) {
+    static void register(Class<? extends Item> clazz, IModifiedItemRenderer renderer) {
         INSTANCES.put(clazz, renderer);
     }
 
