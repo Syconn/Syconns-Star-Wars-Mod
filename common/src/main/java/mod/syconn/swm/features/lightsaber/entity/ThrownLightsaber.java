@@ -1,15 +1,20 @@
 package mod.syconn.swm.features.lightsaber.entity;
 
+import dev.architectury.hooks.item.ItemStackHooks;
 import mod.syconn.swm.core.ModDamageSources;
 import mod.syconn.swm.core.ModEntities;
 import mod.syconn.swm.core.ModItems;
 import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
+import mod.syconn.swm.util.nbt.NbtTools;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
@@ -22,16 +27,23 @@ import net.minecraft.world.phys.EntityHitResult;
 public class ThrownLightsaber extends ThrowableProjectile {
 
     private static final EntityDataAccessor<CompoundTag> LIGHTSABER_DATA = SynchedEntityData.defineId(ThrownLightsaber.class, EntityDataSerializers.COMPOUND_TAG);
-    private final int returnLevel = 2;
+    private InteractionHand hand = InteractionHand.MAIN_HAND;
     private boolean returning = false;
 
     public ThrownLightsaber(EntityType<? extends ThrownLightsaber> entityType, Level level) {
         super(entityType, level);
     }
 
-    public ThrownLightsaber(Level level, LivingEntity shooter, ItemStack stack) {
+    public ThrownLightsaber(Level level, LivingEntity shooter, ItemStack stack, InteractionHand hand) {
         super(ModEntities.THROWN_LIGHTSABER.get(), shooter, level);
         this.entityData.set(LIGHTSABER_DATA, LightsaberTag.getOrCreate(stack).save());
+        this.hand = hand;
+    }
+
+    public ThrownLightsaber(Level level, LivingEntity shooter, InteractionHand hand) {
+        super(ModEntities.THROWN_LIGHTSABER.get(), shooter, level);
+        this.entityData.set(LIGHTSABER_DATA, LightsaberTag.getOrCreate(shooter.getItemInHand(hand)).save());
+        this.hand = hand;
     }
 
     @Override
@@ -47,7 +59,10 @@ public class ThrownLightsaber extends ThrowableProjectile {
             if (this.distanceTo(getOwner()) >= 8) this.returning = true;
 
             if (this.distanceTo(getOwner()) <= 2.5f && !this.level().isClientSide && returning) {
-                if (this.getOwner() instanceof Player player && !player.isCreative()) player.getInventory().add(this.getItem());
+                if (this.getOwner() instanceof Player player && !player.isCreative()) {
+                    if (hand == InteractionHand.OFF_HAND && player.getItemInHand(hand).isEmpty()) player.setItemSlot(EquipmentSlot.OFFHAND, this.getItem());
+                    else if (player instanceof ServerPlayer sp) ItemStackHooks.giveItem(sp, this.getItem());
+                }
                 this.discard();
             }
         }
@@ -56,6 +71,7 @@ public class ThrownLightsaber extends ThrowableProjectile {
 
         if ((this.returning) && entity != null) {
             var vec3 = entity.getEyePosition().subtract(0, 0.25d, 0).subtract(this.position());
+            var returnLevel = 2;
             this.setPosRaw(this.getX(), this.getY() + vec3.y * 0.015 * returnLevel, this.getZ());
             if (this.level().isClientSide) this.yOld = this.getY();
 
@@ -110,12 +126,14 @@ public class ThrownLightsaber extends ThrowableProjectile {
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.returning = compound.getBoolean("return");
+        this.hand = NbtTools.getEnum(InteractionHand.class, compound.getCompound("hand"));
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("return", this.returning);
+        compound.put("hand", NbtTools.writeEnum(this.hand));
     }
 
     @Override

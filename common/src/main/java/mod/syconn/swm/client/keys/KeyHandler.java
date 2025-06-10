@@ -12,12 +12,12 @@ public class KeyHandler {
 
     public static void handleKeyMappings(Player player) {
         while (ModKeys.TOGGLE_ITEM.consumeClick()) {
-            InteractionHand hand = player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+            InteractionHand hand = player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof LightsaberItem ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
             if (player.getItemInHand(hand).getItem() instanceof LightsaberItem) Network.CHANNEL.sendToServer(new ToggleLightsaberPacket(hand));
         }
 
         while (ModKeys.POWER_1.consumeClick()) {
-            InteractionHand hand = player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+            InteractionHand hand = player.getItemInHand(InteractionHand.MAIN_HAND).getItem() instanceof LightsaberItem ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
             if (player.getItemInHand(hand).getItem() instanceof LightsaberItem) Network.CHANNEL.sendToServer(new ThrowLightsaberPacket(hand));
         }
     }

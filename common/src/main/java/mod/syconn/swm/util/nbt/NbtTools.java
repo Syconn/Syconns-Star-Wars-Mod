@@ -22,6 +22,16 @@ public class NbtTools {
         return tag;
     }
 
+    public static <T extends Enum<T>> T getEnum(Class<T> enumClass, CompoundTag tag) {
+        return enumClass.getEnumConstants()[tag.getInt("enumValue")];
+    }
+
+    public static CompoundTag writeEnum(Enum<?> value) {
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("enumValue", value.ordinal());
+        return tag;
+    }
+
     public static Vec3 getVec3(CompoundTag tag) {
         return new Vec3(tag.getDouble("x"), tag.getDouble("y"), tag.getDouble("z"));
     }

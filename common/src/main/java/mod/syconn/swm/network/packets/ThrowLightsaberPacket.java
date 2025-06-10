@@ -29,7 +29,7 @@ public class ThrowLightsaberPacket {
             Player player = context.get().getPlayer();
 
             if (player != null) {
-                ThrownLightsaber thrownLightsaber = new ThrownLightsaber(player.level(), player, player.getItemInHand(hand));
+                ThrownLightsaber thrownLightsaber = new ThrownLightsaber(player.level(), player, hand);
                 thrownLightsaber.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
                 if (!player.isCreative()) player.getItemInHand(hand).shrink(1);
                 player.level().addFreshEntity(thrownLightsaber);
