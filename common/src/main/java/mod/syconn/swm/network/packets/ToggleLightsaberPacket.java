@@ -1,7 +1,7 @@
 package mod.syconn.swm.network.packets;
 
 import dev.architectury.networking.NetworkManager;
-import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
+import mod.syconn.swm.features.lightsaber.data.LightsaberComponent;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import mod.syconn.swm.util.Constants;
 import mod.syconn.swm.util.codec.StreamCodecs;
@@ -27,7 +27,7 @@ public record ToggleLightsaberPacket(InteractionHand hand) implements CustomPack
 
             if (player != null) {
                 ItemStack stack = player.getItemInHand(packet.hand);
-                if (stack.getItem() instanceof LightsaberItem) LightsaberTag.update(stack, LightsaberTag::toggle);
+                if (stack.getItem() instanceof LightsaberItem) LightsaberComponent.update(stack, LightsaberComponent::toggle);
             }
         });
     }

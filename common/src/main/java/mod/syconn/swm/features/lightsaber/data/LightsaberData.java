@@ -5,6 +5,7 @@ import mod.syconn.swm.core.ModItems;
 import mod.syconn.swm.util.json.JsonUtils;
 import mod.syconn.swm.util.nbt.ISerializable;
 import mod.syconn.swm.util.nbt.NbtTools;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -15,28 +16,19 @@ import java.util.UUID;
 
 public record LightsaberData(int model, boolean stable, double length, double radius, int color, List<Vec3> emitterPositions) implements ISerializable<CompoundTag> {
 
-    public LightsaberTag toTag() {
-        return new LightsaberTag(UUID.randomUUID(), model, stable, true, (byte) 0, length, 1, radius, color, emitterPositions);
-    }
-
-    public LightsaberTag toTag(double lengthScalar) {
-        return new LightsaberTag(UUID.randomUUID(), model, stable, true, (byte) 0, length, lengthScalar, radius, color, emitterPositions);
-    }
-
-    public ItemStack toItem() {
-        var stack = new ItemStack(ModItems.LIGHTSABER.get());
-        return toTag().change(stack);
+    public LightsaberComponent component() {
+        return new LightsaberComponent(UUID.randomUUID(), model, stable, true, (byte) 0, length, 1, radius, color, emitterPositions);
     }
 
     public ItemStack toItem(String name) {
         var stack = new ItemStack(ModItems.LIGHTSABER.get());
-        stack.setHoverName(Component.literal(name.substring(0, 1).toUpperCase() + name.substring(1) + " Lightsaber"));
-        return toTag().change(stack);
+        stack.set(DataComponents.CUSTOM_NAME, Component.literal(name.substring(0, 1).toUpperCase() + name.substring(1) + " Lightsaber"));
+        return LightsaberComponent.set(stack, component());
     }
 
     public static LightsaberData fromJson(JsonObject json) {
-        return new LightsaberData(json.get("model").getAsInt(), json.get("stable").getAsBoolean(), json.get("length").getAsDouble(), json.get("radius").getAsDouble(),
-                json.get("color").getAsInt(), JsonUtils.getArray(json.getAsJsonObject("emitterPositions"), JsonUtils::getVec3));
+        return new LightsaberData(json.get("model").getAsInt(), json.get("stable").getAsBoolean(), json.get("length").getAsDouble(), json.get("radius").getAsDouble(), json.get("color").getAsInt(),
+                JsonUtils.getArray(json.getAsJsonObject("emitterPositions"), JsonUtils::getVec3));
     }
 
     public JsonObject toJson() {

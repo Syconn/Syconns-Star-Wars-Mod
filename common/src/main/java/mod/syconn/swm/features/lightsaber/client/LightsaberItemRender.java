@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.architectury.utils.GameInstance;
 import mod.syconn.swm.client.StarWarsClient;
 import mod.syconn.swm.client.render.entity.PlasmaRenderer;
-import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
+import mod.syconn.swm.features.lightsaber.data.LightsaberComponent;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import mod.syconn.swm.util.client.model.ModelUtil;
 import mod.syconn.swm.util.client.render.IModifiedItemRenderer;
@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-public class LightsaberItemRender implements IModifiedItemRenderer, IModifiedPoseRenderer { // TODO FIX LIGHTSABER RENDER WITH NON LIGHSTABER OFFHAND
+public class LightsaberItemRender implements IModifiedItemRenderer, IModifiedPoseRenderer {
 
     @Override
     public void render(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, boolean leftHanded, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay, BakedModel model) {
@@ -34,12 +34,12 @@ public class LightsaberItemRender implements IModifiedItemRenderer, IModifiedPos
     public void renderDirect(ItemStack stack, ItemDisplayContext renderMode, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
         if (!(stack.getItem() instanceof LightsaberItem)) return;
 
-        var lT = LightsaberTag.getOrCreate(stack);
+        var lT = LightsaberComponent.get(stack);
 
         if (renderMode != ItemDisplayContext.GUI) {
-            var handPos = !lT.emitterPositions.isEmpty() ? lT.emitterPositions.get(0) : new Vec3(0, 0, 0);
+            var handPos = !lT.emitterPositions().isEmpty() ? lT.emitterPositions().get(0) : new Vec3(0, 0, 0);
             poseStack.translate(-handPos.x, -handPos.y, -handPos.z);
-            PlasmaRenderer.renderPlasma(poseStack, bufferSource, light, overlay, !lT.stable, lT.getSize(StarWarsClient.getTickDelta()), (float) lT.lengthScalar, (float) lT.radius, true, lT.color);
+            PlasmaRenderer.renderPlasma(poseStack, bufferSource, light, overlay, !lT.stable(), lT.getSize(StarWarsClient.getTickDelta()), (float) lT.lengthScalar(), (float) lT.radius(), true, lT.color());
         }
     }
 

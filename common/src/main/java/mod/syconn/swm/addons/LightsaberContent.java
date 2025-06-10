@@ -1,11 +1,10 @@
 package mod.syconn.swm.addons;
 
 import mod.syconn.swm.core.ModItems;
+import mod.syconn.swm.features.lightsaber.data.LightsaberComponent;
 import mod.syconn.swm.features.lightsaber.data.LightsaberData;
-import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
 import mod.syconn.swm.util.Constants;
 import mod.syconn.swm.util.json.JsonResourceReloader;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -22,8 +21,7 @@ public class LightsaberContent {
         return list;
     }
 
-    public static ItemStack createDefinedSaber(LightsaberTag tag) {
-        var stack = new ItemStack(ModItems.LIGHTSABER.get());
-        return tag.change(stack);
+    public static ItemStack createDefinedSaber(LightsaberComponent component) {
+        return LightsaberComponent.set(new ItemStack(ModItems.LIGHTSABER.get()), component);
     }
 }

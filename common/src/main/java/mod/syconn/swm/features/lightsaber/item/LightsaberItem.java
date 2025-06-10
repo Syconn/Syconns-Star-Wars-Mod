@@ -1,6 +1,7 @@
 package mod.syconn.swm.features.lightsaber.item;
 
-import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
+import mod.syconn.swm.core.ModComponents;
+import mod.syconn.swm.features.lightsaber.data.LightsaberComponent;
 import mod.syconn.swm.util.client.IItemExtensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class LightsaberItem extends Item implements IItemExtensions {
 
     public LightsaberItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).component(ModComponents.LIGHTSABER.get(), LightsaberComponent.create()));
     }
 
     @Override
@@ -28,12 +29,12 @@ public class LightsaberItem extends Item implements IItemExtensions {
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        LightsaberTag.update(stack, LightsaberTag::tick);
+        LightsaberComponent.update(stack, LightsaberComponent::tick);
     }
 
     @Override
     public boolean shouldCauseReequipAnimation(@NotNull ItemStack from, @NotNull ItemStack to, boolean changed) {
-        return LightsaberTag.identical(from, to);
+        return LightsaberComponent.identical(from, to);
     }
 
     @Override

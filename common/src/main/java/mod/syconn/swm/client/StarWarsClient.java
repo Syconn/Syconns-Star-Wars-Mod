@@ -10,7 +10,7 @@ import mod.syconn.swm.core.ModItems;
 import mod.syconn.swm.core.ModKeys;
 import mod.syconn.swm.features.lightsaber.client.LightsaberItemRender;
 import mod.syconn.swm.features.lightsaber.client.ThrownLightsaberRenderer;
-import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
+import mod.syconn.swm.features.lightsaber.data.LightsaberComponent;
 import mod.syconn.swm.features.lightsaber.item.LightsaberItem;
 import mod.syconn.swm.network.Network;
 import mod.syconn.swm.util.Constants;
@@ -40,8 +40,7 @@ public class StarWarsClient {
     }
 
     public static void setup() {
-        ItemPropertiesRegistry.register(ModItems.LIGHTSABER.get(), Constants.withId("model"),
-                ((stack, level, holder, seed) -> (float) LightsaberTag.getOrCreate(stack).model * 0.1f));
+        ItemPropertiesRegistry.register(ModItems.LIGHTSABER.get(), Constants.withId("model"), ((stack, level, holder, seed) -> (float) LightsaberComponent.get(stack).model() * 0.1f));
     }
 
     public static void onClientTick(Player player) {

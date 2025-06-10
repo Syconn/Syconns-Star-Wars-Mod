@@ -4,18 +4,21 @@ import dev.architectury.hooks.item.ItemStackHooks;
 import mod.syconn.swm.core.ModDamageSources;
 import mod.syconn.swm.core.ModEntities;
 import mod.syconn.swm.core.ModItems;
-import mod.syconn.swm.features.lightsaber.data.LightsaberTag;
+import mod.syconn.swm.features.lightsaber.data.LightsaberComponent;
 import mod.syconn.swm.util.nbt.NbtTools;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +29,7 @@ import net.minecraft.world.phys.EntityHitResult;
 
 public class ThrownLightsaber extends ThrowableProjectile {
 
-    private static final EntityDataAccessor<CompoundTag> LIGHTSABER_DATA = SynchedEntityData.defineId(ThrownLightsaber.class, EntityDataSerializers.COMPOUND_TAG);
+    private static final EntityDataAccessor<ItemStack> LIGHTSABER = SynchedEntityData.defineId(ThrownLightsaber.class, EntityDataSerializers.ITEM_STACK);
     private InteractionHand hand = InteractionHand.MAIN_HAND;
     private boolean returning = false;
 
@@ -36,19 +39,19 @@ public class ThrownLightsaber extends ThrowableProjectile {
 
     public ThrownLightsaber(Level level, LivingEntity shooter, ItemStack stack, InteractionHand hand) {
         super(ModEntities.THROWN_LIGHTSABER.get(), shooter, level);
-        this.entityData.set(LIGHTSABER_DATA, LightsaberTag.getOrCreate(stack).save());
+        this.entityData.set(LIGHTSABER, stack);
         this.hand = hand;
     }
 
     public ThrownLightsaber(Level level, LivingEntity shooter, InteractionHand hand) {
         super(ModEntities.THROWN_LIGHTSABER.get(), shooter, level);
-        this.entityData.set(LIGHTSABER_DATA, LightsaberTag.getOrCreate(shooter.getItemInHand(hand)).save());
+        this.entityData.set(LIGHTSABER, shooter.getItemInHand(hand));
         this.hand = hand;
     }
 
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(LIGHTSABER_DATA, new CompoundTag());
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(LIGHTSABER, new ItemStack(ModItems.LIGHTSABER));
     }
 
     @Override
@@ -83,7 +86,7 @@ public class ThrownLightsaber extends ThrowableProjectile {
     }
 
     public ItemStack getItem() {
-        return LightsaberTag.update(new LightsaberTag(this.entityData.get(LIGHTSABER_DATA)).change(new ItemStack(ModItems.LIGHTSABER.get())), tag -> tag.active = true);
+        return LightsaberComponent.update(this.entityData.get(LIGHTSABER), LightsaberComponent::activation);
     }
 
     public boolean isNoGravity() {
@@ -100,18 +103,23 @@ public class ThrownLightsaber extends ThrowableProjectile {
         var soundEvent = SoundEvents.TRIDENT_HIT; // TODO CHANGE THIS TOO
         if (entity2 != entity && entity.hurt(damageSource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) return;
-
-            if (entity instanceof LivingEntity livingEntity2) {
-                if (entity2 instanceof LivingEntity) {
-                    EnchantmentHelper.doPostHurtEffects(livingEntity2, entity2);
-                    EnchantmentHelper.doPostDamageEffects((LivingEntity)entity2, livingEntity2);
-                }
-            }
+            if (this.level() instanceof ServerLevel serverLevel) EnchantmentHelper.doPostAttackEffectsWithItemSource(serverLevel, entity, damageSource, this.getWeaponItem());
+            if (entity instanceof LivingEntity livingEntity) this.doKnockback(livingEntity, damageSource);
         }
 
         this.playSound(soundEvent, 1.0F, 1.0F);
     }
 
+    protected void doKnockback(LivingEntity entity, DamageSource damageSource) {
+        var d = this.level() instanceof ServerLevel serverLevel ? EnchantmentHelper.modifyKnockback(serverLevel, getItem(), entity, damageSource, 0.0F) : 0.0F;
+        if (d > 0.0) {
+            var e = Math.max(0.0, 1.0 - entity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+            var vec3 = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale(d * 0.6 * e);
+            if (vec3.lengthSqr() > 0.0) entity.push(vec3.x, 0.1, vec3.z);
+        }
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         this.returning = true;
