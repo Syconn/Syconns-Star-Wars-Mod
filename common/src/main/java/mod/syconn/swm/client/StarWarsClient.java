@@ -1,5 +1,6 @@
 package mod.syconn.swm.client;
 
+import dev.architectury.event.events.common.TickEvent;
 import dev.architectury.registry.client.keymappings.KeyMappingRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
@@ -31,6 +32,8 @@ public class StarWarsClient {
         KeyMappingRegistry.register(ModKeys.POWER_1);
 
         EntityRendererRegistry.register(ModEntities.THROWN_LIGHTSABER, ThrownLightsaberRenderer::new);
+
+        TickEvent.PLAYER_PRE.register(StarWarsClient::onClientTick);
     }
 
     public static void setup() {
@@ -43,6 +46,6 @@ public class StarWarsClient {
     }
 
     public static float getTickDelta() {
-        return Minecraft.getInstance().getDeltaFrameTime();
+        return Minecraft.getInstance().getFrameTimeNs();
     }
 }

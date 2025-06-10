@@ -2,15 +2,16 @@
   "schemaVersion": 1,
   "id": "swm",
   "version": "${version}",
-  "name": "Star Wars Mod",
-  "description": "A long time ago in a Galaxy Far Far Away",
+  "name": "StarWarMod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
-    "Syconn"
+    "Me!"
   ],
   "contact": {
-    "homepage": ""
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "license": "All-Rights-Reserved",
+  "license": "CC0-1.0",
   "icon": "assets/swm/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -26,10 +27,10 @@
   ],
   "depends": {
     "fabricloader": ">=0.16.14",
-    "minecraft": "~1.20.1",
-    "java": ">=17",
-    "architectury": ">=9.2.14",
-    "fabric-api": "*"
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "architectury": ">=13.0.8",
+    "": "*"
   },
   "suggests": {
     "another-mod": "*"
