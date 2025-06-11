@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class LightsaberItem extends Item implements IItemExtensions {
+public class LightsaberItem extends Item {
 
     public LightsaberItem() {
         super(new Properties().stacksTo(1).component(ModComponents.LIGHTSABER.get(), LightsaberComponent.create()));
@@ -32,10 +32,10 @@ public class LightsaberItem extends Item implements IItemExtensions {
         LightsaberComponent.update(stack, LightsaberComponent::tick);
     }
 
-    @Override
-    public boolean shouldCauseReequipAnimation(@NotNull ItemStack from, @NotNull ItemStack to, boolean changed) {
-        return LightsaberComponent.identical(from, to);
-    }
+//    @Override
+//    public boolean shouldCauseReequipAnimation(@NotNull ItemStack from, @NotNull ItemStack to, boolean changed) {
+//        return LightsaberComponent.identical(from, to);
+//    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {

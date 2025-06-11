@@ -3,7 +3,6 @@ package mod.syconn.swm.mixin;
 import mod.syconn.swm.util.client.IItemExtensions;
 import mod.syconn.swm.util.client.render.RenderUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -40,36 +39,36 @@ public class ItemInHandRendererMixin {
             var itemStack = localPlayer.getMainHandItem();
             var itemStack2 = localPlayer.getOffhandItem();
 
-            if (itemStack.getItem() instanceof IItemExtensions) {
-                this.oMainHandHeight = this.mainHandHeight;
-
-                if (ItemStack.matches(this.mainHandItem, itemStack)) this.mainHandItem = itemStack;
-
-                if (localPlayer.isHandsBusy()) this.mainHandHeight = Mth.clamp(this.mainHandHeight - 0.4f, 0.0f, 1.0f);
-                else {
-                    var f = localPlayer.getAttackStrengthScale(1.0f);
-                    var reequipM = RenderUtil.handleReequipAnimation(this.mainHandItem, itemStack, localPlayer.getInventory().selected);
-                    if (!reequipM && this.mainHandItem != itemStack) this.mainHandItem = itemStack;
-                    this.mainHandHeight += Mth.clamp((!reequipM ? f * f * f : 0.0f) - this.mainHandHeight, -0.4f, 0.4f);
-                }
-
-                if (this.mainHandHeight < 0.1F) this.mainHandItem = itemStack;
-            }
-
-            if (itemStack2.getItem() instanceof IItemExtensions) {
-                this.oOffHandHeight = this.offHandHeight;
-
-                if (ItemStack.matches(this.offHandItem, itemStack2))this.offHandItem = itemStack2;
-
-                if (localPlayer.isHandsBusy()) this.offHandHeight = Mth.clamp(this.offHandHeight - 0.4f, 0.0f, 1.0f);
-                else {
-                    var reequipO = RenderUtil.handleReequipAnimation(this.offHandItem, itemStack2, -1);
-                    if (!reequipO && this.offHandItem != itemStack2) this.offHandItem = itemStack2;
-                    this.offHandHeight += Mth.clamp((float)(!reequipO ? 1 : 0) - this.offHandHeight, -0.4f, 0.4f);
-                }
-
-                if (this.offHandHeight < 0.1F) this.offHandItem = itemStack2;
-            }
+//            if (itemStack.getItem() instanceof IItemExtensions) {
+//                this.oMainHandHeight = this.mainHandHeight;
+//
+//                if (ItemStack.matches(this.mainHandItem, itemStack)) this.mainHandItem = itemStack;
+//
+//                if (localPlayer.isHandsBusy()) this.mainHandHeight = Mth.clamp(this.mainHandHeight - 0.4f, 0.0f, 1.0f);
+//                else {
+//                    var f = localPlayer.getAttackStrengthScale(1.0f);
+//                    var reequipM = RenderUtil.handleReequipAnimation(this.mainHandItem, itemStack, localPlayer.getInventory().selected);
+//                    if (!reequipM && this.mainHandItem != itemStack) this.mainHandItem = itemStack;
+//                    this.mainHandHeight += Mth.clamp((!reequipM ? f * f * f : 0.0f) - this.mainHandHeight, -0.4f, 0.4f);
+//                }
+//
+//                if (this.mainHandHeight < 0.1F) this.mainHandItem = itemStack;
+//            }
+//
+//            if (itemStack2.getItem() instanceof IItemExtensions) {
+//                this.oOffHandHeight = this.offHandHeight;
+//
+//                if (ItemStack.matches(this.offHandItem, itemStack2))this.offHandItem = itemStack2;
+//
+//                if (localPlayer.isHandsBusy()) this.offHandHeight = Mth.clamp(this.offHandHeight - 0.4f, 0.0f, 1.0f);
+//                else {
+//                    var reequipO = RenderUtil.handleReequipAnimation(this.offHandItem, itemStack2, -1);
+//                    if (!reequipO && this.offHandItem != itemStack2) this.offHandItem = itemStack2;
+//                    this.offHandHeight += Mth.clamp((float)(!reequipO ? 1 : 0) - this.offHandHeight, -0.4f, 0.4f);
+//                }
+//
+//                if (this.offHandHeight < 0.1F) this.offHandItem = itemStack2;
+//            }
         }
     }
 }

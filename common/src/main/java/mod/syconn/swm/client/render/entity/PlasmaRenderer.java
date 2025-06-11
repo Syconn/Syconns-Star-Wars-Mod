@@ -234,6 +234,6 @@ public class PlasmaRenderer {
     }
 
     public static void renderLayer(RenderBuffers buffers) {
-        buffers.outlineBufferSource().getBuffer(PLASMA).endVertex();
+        buffers.outlineBufferSource().getBuffer(PLASMA);
     }
 }

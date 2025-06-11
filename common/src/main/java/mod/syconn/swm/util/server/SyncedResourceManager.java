@@ -2,7 +2,6 @@ package mod.syconn.swm.util.server;
 
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
-import mod.syconn.swm.network.Network;
 import mod.syconn.swm.network.packets.SyncResourceDataPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

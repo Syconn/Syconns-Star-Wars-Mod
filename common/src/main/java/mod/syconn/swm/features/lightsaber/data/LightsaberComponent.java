@@ -63,7 +63,7 @@ public record LightsaberComponent(UUID uuid, int model, boolean stable, boolean 
     }
 
     public static LightsaberComponent create() {
-        return LightsaberContent.LIGHTSABER_DATA.get(Constants.withId("mace")).component();
+        return LightsaberContent.LIGHTSABER_DATA.get(Constants.withId("mace")).orElse(new LightsaberData(0, true, 1.4f, 1, -1, List.of())).component();
     }
 
     public static ItemStack update(ItemStack stack, UnaryOperator<LightsaberComponent> function) {

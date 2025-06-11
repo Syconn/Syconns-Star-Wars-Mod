@@ -34,13 +34,12 @@ public enum PlasmaBuffer {
         cubeVertices[2][1] = cubeVertices[3][1] = cubeVertices[6][1] = cubeVertices[7][1] = 0.5f;
         cubeVertices[0][2] = cubeVertices[3][2] = cubeVertices[4][2] = cubeVertices[7][2] = -0.5f;
         cubeVertices[1][2] = cubeVertices[2][2] = cubeVertices[5][2] = cubeVertices[6][2] = 0.5f;
-        skewCubeVertices = deepCopyIntMatrix(cubeVertices);
+        skewCubeVertices = deepCopyIntMatrix();
     }
 
-    private static float[][] deepCopyIntMatrix(float[][] input) {
-        if (input == null) return null;
-        var result = new float[input.length][];
-        for (var r = 0; r < input.length; r++) result[r] = input[r].clone();
+    private static float[][] deepCopyIntMatrix() {
+        var result = new float[PlasmaBuffer.cubeVertices.length][];
+        for (var r = 0; r < PlasmaBuffer.cubeVertices.length; r++) result[r] = PlasmaBuffer.cubeVertices[r].clone();
         return result;
     }
 
@@ -113,7 +112,7 @@ public enum PlasmaBuffer {
         pos4.mul(pose.pose());
         normal.mul(pose.normal());
 
-        vertexConsumer.vertex(pos4.x, pos4.y, pos4.z, r, g, b, a, u, v, overlay, light, normal.x, normal.y, normal.z);
+        vertexConsumer.addVertex(pos4.x, pos4.y, pos4.z).setColor(r, g, b, a).setUv(u, v).setOverlay(overlay).setLight(light).setNormal(normal.x, normal.y, normal.z);
     }
 
     public void vertex(float x, float y, float z, float nx, float ny, float nz, float u, float v) {
