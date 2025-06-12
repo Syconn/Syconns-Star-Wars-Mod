@@ -20,7 +20,7 @@ import java.util.UUID;
 import java.util.function.UnaryOperator;
 
 public record LightsaberComponent(UUID uuid, int model, boolean stable, boolean active, byte transition, double length, double lengthScalar, double radius, int color, List<Vec3> emitterPositions) {
-
+    // TODO DO I NEED LENGTH?
     public static final StreamCodec<RegistryFriendlyByteBuf, LightsaberComponent> STREAM_CODEC = new StreamCodec<>() {
         @Override
         public LightsaberComponent decode(RegistryFriendlyByteBuf buf) {
@@ -63,6 +63,7 @@ public record LightsaberComponent(UUID uuid, int model, boolean stable, boolean 
     }
 
     public static LightsaberComponent create() {
+//        System.out.println("CALLED CREATE");
         return LightsaberContent.LIGHTSABER_DATA.get(Constants.withId("mace")).orElse(new LightsaberData(0, true, 1.4f, 1, -1, List.of())).component();
     }
 

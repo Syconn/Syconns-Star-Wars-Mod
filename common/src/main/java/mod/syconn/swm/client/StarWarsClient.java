@@ -48,6 +48,6 @@ public class StarWarsClient {
     }
 
     public static float getTickDelta() {
-        return Minecraft.getInstance().getFrameTimeNs();
+        return Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
     }
 }

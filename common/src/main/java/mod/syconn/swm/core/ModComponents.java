@@ -19,6 +19,6 @@ public class ModComponents {
     public static final Supplier<DataComponentType<LightsaberComponent>> LIGHTSABER = registerComponent("lightsaber", LightsaberComponent.CODEC, LightsaberComponent.STREAM_CODEC);
 
     private static <T> Supplier<DataComponentType<T>> registerComponent(String id, Codec<T> codec, StreamCodec<RegistryFriendlyByteBuf, T> streamCodec) {
-        return DATA_COMPONENTS.register(id, () -> DataComponentType.<T>builder().persistent(codec).networkSynchronized(streamCodec).cacheEncoding().build());
+        return DATA_COMPONENTS.register(id, () -> DataComponentType.<T>builder().persistent(codec).networkSynchronized(streamCodec).build());
     }
 }
