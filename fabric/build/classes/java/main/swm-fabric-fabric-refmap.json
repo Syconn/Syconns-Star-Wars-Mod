@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "mod/syconn/swm/fabric/mixin/FabricItemMixin": {
+      "allowComponentsUpdateAnimation": "Lnet/fabricmc/fabric/api/item/v1/FabricItem;allowComponentsUpdateAnimation(Lnet/minecraft/class_1657;Lnet/minecraft/class_1268;Lnet/minecraft/class_1799;Lnet/minecraft/class_1799;)Z"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "mod/syconn/swm/fabric/mixin/FabricItemMixin": {
+        "allowComponentsUpdateAnimation": "Lnet/fabricmc/fabric/api/item/v1/FabricItem;allowComponentsUpdateAnimation(Lnet/minecraft/class_1657;Lnet/minecraft/class_1268;Lnet/minecraft/class_1799;Lnet/minecraft/class_1799;)Z"
+      }
+    }
+  }
+}
