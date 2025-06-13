@@ -2,7 +2,7 @@ package mod.syconn.swm.features.lightsaber.item;
 
 import mod.syconn.swm.core.ModComponents;
 import mod.syconn.swm.features.lightsaber.data.LightsaberComponent;
-import mod.syconn.swm.util.client.IItemExtensions;
+import mod.syconn.swm.util.client.ICommonItemExtensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class LightsaberItem extends Item {
+public class LightsaberItem extends Item implements ICommonItemExtensions {
 
     public LightsaberItem() {
         super(new Properties().stacksTo(1).component(ModComponents.LIGHTSABER.get(), LightsaberComponent.create()));
@@ -32,15 +32,14 @@ public class LightsaberItem extends Item {
         LightsaberComponent.update(stack, LightsaberComponent::tick);
     }
 
-//    @Override
-//    public boolean shouldCauseReequipAnimation(@NotNull ItemStack from, @NotNull ItemStack to, boolean changed) {
-//        return LightsaberComponent.identical(from, to);
-//    }
+    public boolean allowUpdateAnimation(@NotNull ItemStack from, @NotNull ItemStack to, boolean changed) {
+        return changed;
+    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         final var stack = player.getItemInHand(usedHand);
-        player.startUsingItem(usedHand);
+        if (LightsaberComponent.get(stack).active()) player.startUsingItem(usedHand);
         return InteractionResultHolder.fail(stack);
     }
 

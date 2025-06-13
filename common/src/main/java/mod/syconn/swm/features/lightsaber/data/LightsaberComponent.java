@@ -63,7 +63,6 @@ public record LightsaberComponent(UUID uuid, int model, boolean stable, boolean 
     }
 
     public static LightsaberComponent create() {
-//        System.out.println("CALLED CREATE");
         return LightsaberContent.LIGHTSABER_DATA.get(Constants.withId("mace")).orElse(new LightsaberData(0, true, 1.4f, 1, -1, List.of())).component();
     }
 
