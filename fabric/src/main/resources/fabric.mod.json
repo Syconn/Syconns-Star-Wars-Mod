@@ -23,7 +23,8 @@
     ]
   },
   "mixins": [
-    "swm.mixins.json"
+    "swm.mixins.json",
+    "swm.fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.14",

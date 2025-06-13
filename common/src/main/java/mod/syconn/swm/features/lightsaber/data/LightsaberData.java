@@ -17,7 +17,6 @@ import java.util.UUID;
 public record LightsaberData(int model, boolean stable, double length, double radius, int color, List<Vec3> emitterPositions) implements ISerializable<CompoundTag> {
 
     public LightsaberComponent component() {
-//        System.out.println("CALLED DATA");
         return new LightsaberComponent(UUID.randomUUID(), model, stable, true, (byte) 0, length, 1, radius, color, emitterPositions);
     }
 
